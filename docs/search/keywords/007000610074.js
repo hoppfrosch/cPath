@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("pat",["Function"],[["PathCanonicalize",,[[,,,,0,"File:cPath.ahk:PathCanonicalize"]]],["PathCombine",,[[,,,,0,"File:cPath.ahk:PathCombine"]]],["PathFixSlashes",,[[,,,,0,"File:cPath.ahk:PathFixSlashes"]]]]);
