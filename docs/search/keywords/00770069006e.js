@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("win",["Variable"],[["WIN32_ROOT",,[["RE_PATH",,,,0,"File:cPath.ahk:RE_PATH.WIN32_ROOT","AutoHotKeyClass:RE_PATH:WIN32_ROOT"]]]]);

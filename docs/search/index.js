@@ -1,0 +1,1 @@
+NDSearch.OnPrefixIndexLoaded(["drv","not","pat","re_","sla","unc","win"]);
