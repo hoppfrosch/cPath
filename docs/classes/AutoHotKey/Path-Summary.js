@@ -1,0 +1,1 @@
+NDFramePage.OnPageTitleLoaded("AutoHotKeyClass:Path","Path");NDSummary.OnSummaryLoaded("AutoHotKeyClass:Path",[["AutoHotKey","AutoHotKey"]],[["Classes","Class"],["Functions","Function"],["Groups","Group"]],[[6,0,0,"Path"],[7,0,2,"Functions","Functions"],[8,0,1,"__New","__New"]]);

@@ -1,0 +1,1 @@
+NDFramePage.OnPageTitleLoaded("File:Intro.txt","Intro.txt");NDSummary.OnSummaryLoaded("File:Intro.txt",[["Text File","TextFile"]],[["Sections","Section"]],[[1,0,0,"Introduction","Introduction"],[2,0,0,"AutoHotkey-Version","AutoHotkey-Version"],[3,0,0,"Credits","Credits"],[4,0,0,"Author","Author"],[5,0,0,"License","License"]]);

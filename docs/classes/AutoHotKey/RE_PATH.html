@@ -8,38 +8,38 @@
 
 <body onload="NDLoader.OnLoad('Content');" class="NDPage NDContentPage">
 
-<a name="Topic5"></a><div class="CTopic TClass LAutoHotKey first">
+<a name="Topic9"></a><div class="CTopic TClass LAutoHotKey first">
  <div class="CTitle">RE_PATH</div>
- <div class="CBody"><p>Helper Class with Constants, defining required regular expressions</p></div>
+ <div class="CBody"><p>Helper Class with Constants, defining required regular expressions</p><p>Authors:	<a href="#" onclick="javascript:location.href='ma\u0069'+'lto\u003a'+'hoppf'+'rosch'+'\u0040'+'gmx'+'\u002ede';return false;">hoppfrosch</a>: Original</p></div>
 </div>
 
-<a name="Variables"></a><a name="Topic6"></a><div class="CTopic TGroup LAutoHotKey">
+<a name="Variables"></a><a name="Topic10"></a><div class="CTopic TGroup LAutoHotKey">
  <div class="CTitle">Variables</div>
 </div>
 
-<a name="SLASH"></a><a name="Topic7"></a><div class="CTopic TVariable LAutoHotKey">
+<a name="SLASH"></a><a name="Topic11"></a><div class="CTopic TVariable LAutoHotKey">
  <div class="CTitle">SLASH</div>
- <div class="CBody"><p>RegEx describing Slashes</p></div>
+ <div class="CBody"><p>RegEx describing Slashes</p><pre><span class="SHKeyword">static</span> SLASH := <span class="SHString">&quot;[\\/]&quot;</span></pre></div>
 </div>
 
-<a name="NOTSLASH"></a><a name="Topic8"></a><div class="CTopic TVariable LAutoHotKey">
+<a name="NOTSLASH"></a><a name="Topic12"></a><div class="CTopic TVariable LAutoHotKey">
  <div class="CTitle">NOTSLASH</div>
- <div class="CBody"><p>RegEx describing Not-Slashes</p></div>
+ <div class="CBody"><p>RegEx describing Not-Slashes</p><pre><span class="SHKeyword">static</span> NOTSLASH := <span class="SHString">&quot;^&quot;</span> RE_PATH.SLASH</pre></div>
 </div>
 
-<a name="DRV_VOL"></a><a name="Topic9"></a><div class="CTopic TVariable LAutoHotKey">
+<a name="DRV_VOL"></a><a name="Topic13"></a><div class="CTopic TVariable LAutoHotKey">
  <div class="CTitle">DRV_VOL</div>
- <div class="CBody"><p>RegEx describing Drive-volume of a Windows-Path</p></div>
+ <div class="CBody"><p>RegEx describing Drive-volume of a Windows-Path</p><pre><span class="SHKeyword">static</span> DRV_VOL := <span class="SHString">&quot;[A-Za-z]:&quot;</span></pre></div>
 </div>
 
-<a name="UNC_VOL"></a><a name="Topic10"></a><div class="CTopic TVariable LAutoHotKey">
+<a name="UNC_VOL"></a><a name="Topic14"></a><div class="CTopic TVariable LAutoHotKey">
  <div class="CTitle">UNC_VOL</div>
- <div class="CBody"><p>RegEx describing Drive-volume of a Windows-Path, i.e. &quot;\\pcjok/test&quot;</p></div>
+ <div class="CBody"><p>RegEx describing Drive-volume of a Windows-Path, i.e. &quot;\\pcjok/test&quot;</p><pre><span class="SHKeyword">static</span> UNC_VOL := RE_PATH.SLASH RE_PATH.SLASH RE_PATH.NOTSLASH <span class="SHString">&quot;+&quot;</span> RE_PATH.SLASH RE_PATH.NOTSLASH <span class="SHString">&quot;+&quot;</span></pre></div>
 </div>
 
-<a name="WIN32_ROOT"></a><a name="Topic11"></a><div class="CTopic TVariable LAutoHotKey last">
+<a name="WIN32_ROOT"></a><a name="Topic15"></a><div class="CTopic TVariable LAutoHotKey last">
  <div class="CTitle">WIN32_ROOT</div>
- <div class="CBody"><p>RegEx describing valid rootdir on windows systems</p></div>
+ <div class="CBody"><p>RegEx describing valid rootdir on windows systems</p><pre><span class="SHKeyword">static</span> WIN32_ROOT := <span class="SHString">&quot;(?:&quot;</span> RE_PATH.UNC_VOL RE_PATH.SLASH <span class="SHString">&quot;|&quot;</span> RE_PATH.DRV_VOL RE_PATH.SLASH <span class="SHString">&quot;)&quot;</span></pre></div>
 </div>
 
 </body></html>
