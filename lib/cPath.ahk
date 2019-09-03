@@ -1,28 +1,111 @@
-develop := 0
+#Warn All
+
+release_version() {
+	return "0.1.1"
+}
+
+develop := 1
 
 if (develop) {
 
-MsgBox RE_PATH.UNC_VOL
-MsgBox RE_PATH.WIN32_ROOT
+;MsgBox RE_PATH.UNC_VOL
+;MsgBox RE_PATH.WIN32_ROOT
 
-x := path("C:/tmp/..\test", "../tmp", "test.txt")
-MsgBox x 
-
+OutputDebug "Path-function:" path("C:/tmp/..\test", "../tmp", "test.txt").canonpath()
+OutputDebug "Path-class: " Path.new("C:/tmp/..\test", "../tmp", "test.txt").canonpath()
 }
 
 return
 
-release_version() {
-	return "0.1.0"
-}
 
-
-
+; ***************************************************************************************************************
+; Klassen
+; ***************************************************************************************************************
+;========================================================================
 class Path {
-	path := ""
+	/* Class: Path
+    	class for working with file paths
 
+		It is build after Perl's <Path\:\:Tiny: https://metacpan.org/pod/Path::Tiny> module.
+
+	Authors:	<hoppfrosch at hoppfrosch@gmx.de>: Original
+	*/
+	 _path := ""
+	
+	canonpath() {
+		return PathCanonicalize(this._path)
+	}
+
+	/* 	Constructor: __New
+
+	Konstruktor for Class <Path>
+
+	Parameters: 
+		path - path 
+		params* - more pathes. All pathes are used to build the final path
+
+	Returns:
+		class <Path>
+	*/
+	__New(vPath, params*) {
+		vPath := PathFixSlashes(vPath)
+
+		for index,param in params {	
+			vPath := PathCombine(vPath, param)
+		}
+		this._path := vPath
+		return this
+	}
 }
 
+;========================================================================
+class RE_PATH {
+	/* Class: RE_PATH
+
+	Helper Class with Constants, defining required regular expressions
+
+	Authors:	<hoppfrosch at hoppfrosch@gmx.de>: Original
+	*/
+	/* Variable: SLASH
+	   RegEx describing Slashes
+	   --- Code
+		static SLASH := "[\\/]"
+	   ---
+	*/
+	static SLASH						:= "[\\/]"
+	/* Variable: NOTSLASH
+	   RegEx describing Not-Slashes
+	   --- Code
+		static NOTSLASH := "^" RE_PATH.SLASH
+	   ---
+	*/
+	static NOTSLASH					    := "^" RE_PATH.SLASH
+	/* Variable: DRV_VOL
+	   RegEx describing Drive-volume of a Windows-Path
+	   --- Code
+		static DRV_VOL := "[A-Za-z]:"
+	   ---
+	*/
+	static DRV_VOL						:= "[A-Za-z]:"
+	/* Variable: UNC_VOL
+	   RegEx describing Drive-volume of a Windows-Path, i.e. "\\pcjok/test"
+	   --- Code
+		static UNC_VOL := RE_PATH.SLASH RE_PATH.SLASH RE_PATH.NOTSLASH "+" RE_PATH.SLASH RE_PATH.NOTSLASH "+"
+	   ---
+	*/
+	static UNC_VOL						:= RE_PATH.SLASH RE_PATH.SLASH RE_PATH.NOTSLASH "+" RE_PATH.SLASH RE_PATH.NOTSLASH "+"
+	/* Variable: WIN32_ROOT
+	   RegEx describing valid rootdir on windows systems
+	   --- Code
+		static WIN32_ROOT := "(?:" RE_PATH.UNC_VOL RE_PATH.SLASH "|" RE_PATH.DRV_VOL RE_PATH.SLASH ")"
+	   ---
+	*/
+	static WIN32_ROOT					:= "(?:" RE_PATH.UNC_VOL RE_PATH.SLASH "|" RE_PATH.DRV_VOL RE_PATH.SLASH ")"
+}
+
+; ***************************************************************************************************************
+; Section: Globals
+; ***************************************************************************************************************
 ;========================================================================
 /* 	Function: Path
 
@@ -42,13 +125,12 @@ Encoding:
 	Unicode / ASCII
 */
 Path(vPath, params*) {
-	vPath := PathFixSlashes(vPath)
-
-	for index,param in params {
-		vPath := PathCombine(vPath, param)
-	}
-	return vPath
+	return Path.new(vPath, params*)
 }
+
+; ***************************************************************************************************************
+; *** Functional interface to WIN API
+; ***************************************************************************************************************
 
 ;========================================================================
 /* 	Function: PathCanonicalize
@@ -61,9 +143,6 @@ Parameters:
 Returns:
     canonicalized path
 
-AutoHotkey Version:
-	Tested & developed with Autohotkey 2.0-a104
-
 Encoding:
 	Unicode / ASCII
 
@@ -71,11 +150,11 @@ References:
 	* <Microsoft Documentation: https://docs.microsoft.com/en-us/windows/win32/shell/shlwapi-path>, 
 
 */
-PathCanonicalize(path) {
-	static MAX_PATH := 255
-	path := PathFixSlashes(path)
+PathCanonicalize(vPath) {
+	MAX_PATH := 255
+	Src := PathFixSlashes(vPath)
 	VarSetCapacity(Dest, (A_IsUnicode ? 2 : 1) * MAX_PATH, 0)
-	dllCall("shlwapi.dll\PathCanonicalize", "UInt", &Dest, "UInt", &path)	
+	dllCall("shlwapi.dll\PathCanonicalize", "Str", Dest, "Str", Src)	
 	return Dest
 }
 
@@ -90,9 +169,6 @@ Parameters:
 
 Returns:
     concatenated path string
-
-AutoHotkey Version:
-	Tested & developed with Autohotkey 2.0-a104
 
 Encoding:
 	Unicode / ASCII
@@ -122,9 +198,6 @@ Parameters:
 Returns:
     1 (TRUE) if the file exists; otherwise, 0 (FALSE).
 
-AutoHotkey Version:
-	Tested & developed with Autohotkey 2.0-a104
-
 Encoding:
 	Unicode / ASCII
 
@@ -132,11 +205,15 @@ References:
 	* <Microsoft Documentation: https://docs.microsoft.com/en-us/windows/win32/shell/shlwapi-path>, 
 
 */
-PathFileExists(path) {
-	path := PathFixSlashes(path)
-    Return DllCall("SHLWAPI.DLL\PathFileExists", "UInt", &path)
+PathFileExists(vPath) {
+	vPath := PathFixSlashes(vPath)
+    Return DllCall("SHLWAPI.DLL\PathFileExists", "UInt", &vPath)
 }
 
+
+; ***************************************************************************************************************
+; *** Tool - Functions
+; ***************************************************************************************************************
 
 ;========================================================================
 /* 	Function: PathFixSlashes
@@ -149,34 +226,9 @@ Parameters:
 Returns:
     path with fixed Slashes
 
-AutoHotkey Version:
-	Tested & developed with Autohotkey 2.0-a104
-
 Encoding:
 	Unicode / ASCII
 */
-PathFixSlashes(path) {
-	return RegExReplace(path,"\/","\")
-}
-
-/* Class: RE_PATH
-
-Helper Class with Constants, defining required regular expressions
-*/
-class RE_PATH {
-	; Variable: SLASH
-	; RegEx describing Slashes
-	static SLASH						:= "[\\/]"
-	; Variable: NOTSLASH
-	; RegEx describing Not-Slashes
-	static NOTSLASH					    := "^" RE_PATH.SLASH
-	; Variable: DRV_VOL
-	; RegEx describing Drive-volume of a Windows-Path
-	static DRV_VOL						:= "[A-Za-z]:"
-	; Variable: UNC_VOL
-	; RegEx describing Drive-volume of a Windows-Path, i.e. "\\pcjok/test"
-	static UNC_VOL						:= RE_PATH.SLASH RE_PATH.SLASH RE_PATH.NOTSLASH "+" RE_PATH.SLASH RE_PATH.NOTSLASH "+"
-	; Variable: WIN32_ROOT
-	; RegEx describing valid rootdir on windows systems
-	static WIN32_ROOT					:= "(?:" RE_PATH.UNC_VOL RE_PATH.SLASH "|" RE_PATH.DRV_VOL RE_PATH.SLASH ")"
+PathFixSlashes(vPath) {
+	return RegExReplace(vPath,"\/","\")
 }
