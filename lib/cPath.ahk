@@ -7,16 +7,32 @@ release_version() {
 develop := 1
 
 if (develop) {
+OutputDebug "DBGVIEWCLEAR"
 
-;MsgBox RE_PATH.UNC_VOL
-;MsgBox RE_PATH.WIN32_ROOT
+; -----------------------------------------------------
+strRef := "C:\test\test.txt"
 
-OutputDebug "Path-function:" path("C:/tmp/..\test", "../tmp", "test.txt").canonpath()
-OutputDebug "Path-class: " Path.new("C:/tmp/..\test", "../tmp", "test.txt").canonpath()
+strResult := path("C:/tmp/..\test", "../tmp", "test.txt").canonpath
+assert(StrCompare(strResult,strRef), "Property <canonpath> using function constructor")
+
+strResult := Path.new("C:/tmp/..\test", "../tmp", "test.txt").canonpath
+assert(StrCompare(strResult,strRef), "Property <canonpath> using class constructor")
+
+strResult := PathCanonicalize("C:/tmp/..\test/../tmp/test.txt")
+assert(StrCompare(strResult,strRef), "Funtional interface <PathCanonicalize>")
 }
 
 return
 
+assert(test_ok, message) {
+	static n_assert := 0
+	n_assert++
+	str := "SUCCESS"
+	If (!test_ok)
+		str := "FAIL"
+
+	OutputDebug ("(" n_assert ") " str " - " message) 
+}
 
 ; ***************************************************************************************************************
 ; Klassen
