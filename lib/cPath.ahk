@@ -32,10 +32,25 @@ class Path {
 	*/
 	 _path := ""
 	
-	canonpath() {
-		return PathCanonicalize(this._path)
+
+	; ===== Methods ===============================================================
+	canonpath[] {
+	/* -------------------------------------------------------------------------------
+	Property: canonpath [get]
+	Returns the canonicalized path
+
+	See:
+	<stringify>, <value>
+
+	Examples: 
+	> MsgBox(path("C:/tmp/..\test", "../tmp", "test.txt").canonpath)
+	*/
+		get {
+			return PathCanonicalize(this._path)
+		}
 	}
 
+	; ===== Properties ===============================================================#
 	/* 	Constructor: __New
 
 	Konstruktor for Class <Path>
