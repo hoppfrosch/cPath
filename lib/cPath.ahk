@@ -10,16 +10,23 @@ if (develop) {
 OutputDebug "DBGVIEWCLEAR"
 
 ; -----------------------------------------------------
-strRef := "C:\test\test.txt"
+strRef := "C:\tmp\test.txt"
 
 strResult := path("C:/tmp/..\test", "../tmp", "test.txt").canonpath
-assert(StrCompare(strResult,strRef), "Property <canonpath> using function constructor")
+assert(StrCompare(strResult,strRef), "Property <canonpath> using function constructor (Result <" strResult "> <=> Reference <" strRef ">)")
 
 strResult := Path.new("C:/tmp/..\test", "../tmp", "test.txt").canonpath
-assert(StrCompare(strResult,strRef), "Property <canonpath> using class constructor")
+assert(StrCompare(strResult,strRef), "Property <canonpath> using class constructor (Result <" strResult "> <=> Reference <" strRef ">)")
 
+OutputDebug "**********************************************************************"
+OutputDebug "****** Testing functional interface **********************************"
+OutputDebug "**********************************************************************"
 strResult := PathCanonicalize("C:/tmp/..\test/../tmp/test.txt")
-assert(StrCompare(strResult,strRef), "Funtional interface <PathCanonicalize>")
+assert(StrCompare(strResult,strRef), "Funtional interface <PathCanonicalize> (Result <" strResult "> <=> Reference <" strRef ">)")
+
+strResult := PathCombine("C:\tmp", "test.txt")
+assert(StrCompare(strResult,strRef), "Functional interface <PathCombine> (Result <" strResult "> <=> Reference <" strRef ">)")
+
 }
 
 return
@@ -28,7 +35,7 @@ assert(test_ok, message) {
 	static n_assert := 0
 	n_assert++
 	str := "SUCCESS"
-	If (!test_ok)
+	If (test_ok != 0)
 		str := "FAIL"
 
 	OutputDebug ("(" n_assert ") " str " - " message) 
@@ -183,9 +190,9 @@ References:
 */
 PathCanonicalize(vPath) {
 	MAX_PATH := 255
-	Src := PathFixSlashes(vPath)
+	vPath := PathFixSlashes(vPath)
 	VarSetCapacity(Dest, (A_IsUnicode ? 2 : 1) * MAX_PATH, 0)
-	dllCall("shlwapi.dll\PathCanonicalize", "Str", Dest, "Str", Src)	
+	dllCall("shlwapi.dll\PathCanonicalize", "Str", Dest, "Str", vPath)	
 	return Dest
 }
 
@@ -210,11 +217,8 @@ References:
 */
 PathCombine(dirname, filename) {
 	static MAX_PATH := 255
-	dirname := PathFixSlashes(dirname)
-	filename := PathFixSlashes(filename)
 	VarSetCapacity(Dest, (A_IsUnicode ? 2 : 1) * MAX_PATH, 1)
-	dllCall("shlwapi.dll\PathCombine", "UInt", &Dest, "UInt", &dirname, "UInt", &filename)	
-
+	dllCall("shlwapi.dll\PathCombine", "Str", Dest, "Str", dirname, "Str", filename)	
 	return Dest
 }
 
@@ -238,7 +242,7 @@ References:
 */
 PathFileExists(vPath) {
 	vPath := PathFixSlashes(vPath)
-    Return DllCall("SHLWAPI.DLL\PathFileExists", "UInt", &vPath)
+    Return DllCall("SHLWAPI.DLL\PathFileExists", "Str", vPath)
 }
 
 
