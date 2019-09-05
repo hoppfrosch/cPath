@@ -1,1 +1,1 @@
-NDSearch.OnPrefixDataLoaded("aut",["Section"],[["Author",,[[,,,,0,"File:Intro.txt:Author"]]],["AutoHotkey-Version",,[[,,,,0,"File:Intro.txt:AutoHotkey-Version"]]]]);
+NDSearch.OnPrefixDataLoaded("aut",["Section"],[["Author",,[[,,,,0,"File:Readme.txt:Author"]]],["AutoHotkey-Version",,[[,,,,0,"File:Readme.txt:AutoHotkey-Version"]]]]);
