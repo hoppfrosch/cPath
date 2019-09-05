@@ -54,6 +54,7 @@ class Path {
 	Authors:	<hoppfrosch at hoppfrosch@gmx.de>: Original
 	*/
 	 _path := ""
+	 _parts := Array();
 	
 
 	; ===== Methods ===============================================================
@@ -73,6 +74,20 @@ class Path {
 		}
 	}
 
+	parts[] {
+	/* -------------------------------------------------------------------------------
+	Property: parts [get]
+	Returns the initial parts of the path
+
+	Examples: 
+	> arr := Array()
+	> arr := path("C:/tmp/..\test", "../tmp", "test.txt").parts
+	*/
+		get {
+			return this._parts
+		}
+	}
+
 	; ===== Properties ===============================================================#
 	/* 	Constructor: __New
 
@@ -87,9 +102,11 @@ class Path {
 	*/
 	__New(vPath, params*) {
 		vPath := PathFixSlashes(vPath)
+		this._parts.push(vPath)
 
 		for index,param in params {	
 			vPath := PathCombine(vPath, param)
+			this._parts.push(PathFixSlashes(param))
 		}
 		this._path := vPath
 		return this
