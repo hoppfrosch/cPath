@@ -59,6 +59,18 @@ for test, expected in data {
 	res := PathIsUNCServer(test)
 	assert(res = expected, "PathIsUNCServer('" test "') -> " res)
 } 
+
+; ------------------------------- PathIsUNCServerShare ---------------------
+data := Map()
+data["\\path1\path2"] := 1
+data["\\path3"] := 0
+data["acme\path4\path5"] := 0
+
+for test, expected in data {
+	res := PathIsUNCServerShare(test)
+	assert(res = expected, "PathIsUNCServerShare('" test "') -> " res)
+} 
+
 ; --------------------------- PathRelativePathTo ---------------------------
 expected := "..\temp3\temp4"
 strResult := PathRelativePathTo("C:\Temp1\Temp2",FILE_ATTRIBUTE.DIRECTORY,"C:\Temp1\Temp3\Temp4",FILE_ATTRIBUTE.DIRECTORY) 
