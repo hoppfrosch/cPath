@@ -194,6 +194,27 @@ PathIsUNC(vPath)    {
 }
 
 ;========================================================================
+/* 	Function: PathIsUNCServer
+
+Determines if a string is a valid Universal Naming Convention (UNC) for a server path only.
+
+Parameters: 
+	vPath - full path to verify.
+
+Returns:
+	Returns 1 (TRUE) if the string is a valid UNC path for a server only (no share name); otherwise, 0 (FALSE)
+
+References:
+	* <PathIsUNCServer function: https://technet.microsoft.com/de-de/office/bb773722(v=vs.80).aspx>
+	* <Microsoft Documentation: https://docs.microsoft.com/en-us/windows/win32/shell/shlwapi-path> 
+*/
+PathIsUNCServer(vPath)  {
+	vPath := PathFixSlashes(vPath)
+    ret := DllCall("SHLWAPI.DLL\PathIsUNCServer", "Str",vPath)
+	return ret
+}
+
+;========================================================================
 /* 	Function: PathRelativePathTo
 
 Creates a relative path from one file or folder to another.
