@@ -30,10 +30,30 @@ assert(res = FILE_ATTRIBUTE.DIRECTORY , "<PathIsDirectory> (Input <C:\Program Fi
 res := PathIsDirectory("C:\X1234")
 assert(res != FILE_ATTRIBUTE.DIRECTORY, "<PathIsDirectory> (Input <C:\X1234>)")
 
+; ------------------------------- PathIsUNC --------------------------------
+data := Map()
+data["\\path1\path2"] := 1
+data["\\path1"] := 1
+data["acme\path4\path5"] := 0
+data["\\"] := 1
+data["\\?\UNC\path1\path2"] := 1
+data["\\?\UNC\path1"] := 1
+data["\\?\UNC\"] := 1
+data["\path1"] := 0
+data["path1"] := 0
+data["c:\path1"] := 0
+data["\\?\c:\path1"] := 0
+
+for test, expected in data {
+	res := PathIsUNC(test)
+	assert(res = expected, "PathIsUNC('" test "') -> " res)
+} 
+
 ; --------------------------- PathRelativePathTo ---------------------------
 expected := "..\temp3\temp4"
 strResult := PathRelativePathTo("C:\Temp1\Temp2",FILE_ATTRIBUTE.DIRECTORY,"C:\Temp1\Temp3\Temp4",FILE_ATTRIBUTE.DIRECTORY) 
 assert(StrCompare(strResult,expected) = 0, "<PathRelativePathTo> (Result <" strResult "> <=> Expected <" expected ">)")
+
 
 return
 
