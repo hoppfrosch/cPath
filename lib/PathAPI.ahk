@@ -174,6 +174,26 @@ PathIsDirectory(vPath)  {
 }
 
 ;========================================================================
+/* 	Function: PathIsUNC
+
+Determines if a path string is a valid Universal Naming Convention (UNC) path, as opposed to a path based on a drive letter.
+
+Parameters: 
+	vPath - full path to verify.
+
+Returns:
+	Returns 1 (TRUE) if the string is a valid UNC path; otherwise, 0 (FALSE)
+
+References:
+	* <Microsoft Documentation: https://docs.microsoft.com/en-us/windows/win32/shell/shlwapi-path>, 
+*/
+PathIsUNC(vPath)    {
+	vPath := PathFixSlashes(vPath)
+    ret := DllCall("SHLWAPI.DLL\PathIsUNC", "Str", vPath)
+	return ret
+}
+
+;========================================================================
 /* 	Function: PathRelativePathTo
 
 Creates a relative path from one file or folder to another.
