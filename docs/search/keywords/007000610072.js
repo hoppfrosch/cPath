@@ -1,1 +1,0 @@
-NDSearch.OnPrefixDataLoaded("par",["Property"],[["parts",,[["Path",,,,0,"File:cPath.ahk:Path.parts","AutoHotKeyClass:Path:parts"]]]]);

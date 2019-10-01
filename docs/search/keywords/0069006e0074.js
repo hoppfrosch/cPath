@@ -1,1 +1,1 @@
-NDSearch.OnPrefixDataLoaded("int",["Section"],[["Introduction",,[[,,,,0,"File:Readme.txt:Introduction"]]]]);
+NDSearch.OnPrefixDataLoaded("int",["Constant","Section"],[["INTEGRITY_STREAM",,[["FILE_ATTRIBUTE",,,,0,"File:PathAPI.ahk:FILE_ATTRIBUTE.INTEGRITY_STREAM","AutoHotKeyClass:FILE_ATTRIBUTE:INTEGRITY_STREAM"]]],["Introduction",,[[,,,,1,"File:Readme.txt:Introduction"]]]]);

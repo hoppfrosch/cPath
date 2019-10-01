@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("com",["Constant"],[["COMPRESSED",,[["FILE_ATTRIBUTE",,,,0,"File:PathAPI.ahk:FILE_ATTRIBUTE.COMPRESSED","AutoHotKeyClass:FILE_ATTRIBUTE:COMPRESSED"]]]]);

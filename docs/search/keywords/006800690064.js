@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("hid",["Constant"],[["HIDDEN",,[["FILE_ATTRIBUTE",,,,0,"File:PathAPI.ahk:FILE_ATTRIBUTE.HIDDEN","AutoHotKeyClass:FILE_ATTRIBUTE:HIDDEN"]]]]);

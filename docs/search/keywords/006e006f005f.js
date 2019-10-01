@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("no_",["Constant"],[["NO_SCRUB_DATA",,[["FILE_ATTRIBUTE",,,,0,"File:PathAPI.ahk:FILE_ATTRIBUTE.NO_SCRUB_DATA","AutoHotKeyClass:FILE_ATTRIBUTE:NO_SCRUB_DATA"]]]]);

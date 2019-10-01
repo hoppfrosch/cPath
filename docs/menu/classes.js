@@ -1,1 +1,1 @@
-NDMenu.OnSectionLoaded("classes.js",[[1,"Path"],[1,"RE_PATH"]]);
+NDMenu.OnSectionLoaded("classes.js",[[1,"FILE_ATTRIBUTE"]]);
