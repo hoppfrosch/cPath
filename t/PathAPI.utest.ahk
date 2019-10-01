@@ -1,24 +1,39 @@
-#include %A_ScriptDir%\..\..\lib\PathAPI.ahk
+#include %A_ScriptDir%\..\lib\PathAPI.ahk
 #Warn All
 
 OutputDebug "DBGVIEWCLEAR"
 
 ; -----------------------------------------------------
-strRef := "C:\tmp\test.txt"
+expected := "C:\tmp\test.txt"
 
 OutputDebug "**********************************************************************"
 OutputDebug "****** Testing functional interface **********************************"
 OutputDebug "**********************************************************************"
+
+; ---------------------------- PathCanonicalize ---------------------------- 
 strResult := PathCanonicalize("C:/tmp/..\test/../tmp/test.txt")
-assert(StrCompare(strResult,strRef) = 0, "Funtional interface <PathCanonicalize> (Result <" strResult "> <=> Reference <" strRef ">)")
+assert(StrCompare(strResult,expected) = 0, "<PathCanonicalize> (Result <" strResult "> <=> Expected <" expected ">)")
 
+; ------------------------------- PathCombine ------------------------------
 strResult := PathCombine("C:\tmp", "test.txt")
-assert(StrCompare(strResult,strRef) = 0, "Functional interface <PathCombine> (Result <" strResult "> <=> Reference <" strRef ">)")
+assert(StrCompare(strResult,expected) = 0, "<PathCombine> (Result <" strResult "> <=> Expected <" expected ">)")
 
+; ----------------------------- PathFileExists -----------------------------
+res := PathFileExists("c:\Windows\regedit.exe")
+assert(res = 1, "<PathFileExists> (Input <c:\Windows\regedit.exe)")
+res := PathFileExists("c:\Windows\XXregedit.exeXX")
+assert(res = 0, "<PathFileExists> (Input <c:\Windows\XXregeditXX.exe)")
+
+; ----------------------------- PathIsDirectory ----------------------------
 res := PathIsDirectory("C:\Program Files")
-assert(res = FILE_ATTRIBUTE.DIRECTORY , "Functional interface <PathIsDirectory> (Input <C:\Program Files>)")
+assert(res = FILE_ATTRIBUTE.DIRECTORY , "<PathIsDirectory> (Input <C:\Program Files>)")
 res := PathIsDirectory("C:\X1234")
-assert(res != FILE_ATTRIBUTE.DIRECTORY, "Functional interface <PathIsDirectory> (Input <C:\X1234>)")
+assert(res != FILE_ATTRIBUTE.DIRECTORY, "<PathIsDirectory> (Input <C:\X1234>)")
+
+; --------------------------- PathRelativePathTo ---------------------------
+expected := "..\temp3\temp4"
+strResult := PathRelativePathTo("C:\Temp1\Temp2",FILE_ATTRIBUTE.DIRECTORY,"C:\Temp1\Temp3\Temp4",FILE_ATTRIBUTE.DIRECTORY) 
+assert(StrCompare(strResult,expected) = 0, "<PathRelativePathTo> (Result <" strResult "> <=> Expected <" expected ">)")
 
 return
 
