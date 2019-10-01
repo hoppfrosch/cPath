@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("spa",["Constant"],[["SPARSE_FILE",,[["FILE_ATTRIBUTE",,,,0,"File:PathAPI.ahk:FILE_ATTRIBUTE.SPARSE_FILE","AutoHotKeyClass:FILE_ATTRIBUTE:SPARSE_FILE"]]]]);

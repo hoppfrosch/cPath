@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("rea",["Constant"],[["READONLY",,[["FILE_ATTRIBUTE",,,,0,"File:PathAPI.ahk:FILE_ATTRIBUTE.READONLY","AutoHotKeyClass:FILE_ATTRIBUTE:READONLY"]]]]);

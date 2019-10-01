@@ -1,1 +1,1 @@
-NDSearch.OnPrefixDataLoaded("not",["Variable"],[["NOTSLASH",,[["RE_PATH",,,,0,"File:cPath.ahk:RE_PATH.NOTSLASH","AutoHotKeyClass:RE_PATH:NOTSLASH"]]]]);
+NDSearch.OnPrefixDataLoaded("not",["Constant"],[["NOT_CONTENT_INDEXED",,[["FILE_ATTRIBUTE",,,,0,"File:PathAPI.ahk:FILE_ATTRIBUTE.NOT_CONTENT_INDEXED","AutoHotKeyClass:FILE_ATTRIBUTE:NOT_CONTENT_INDEXED"]]]]);

@@ -1,1 +1,0 @@
-NDSearch.OnPrefixDataLoaded("can",["Property"],[["canonpath",,[["Path",,,,0,"File:cPath.ahk:Path.canonpath","AutoHotKeyClass:Path:canonpath"]]]]);

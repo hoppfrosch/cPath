@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("arc",["Constant"],[["ARCHIVE",,[["FILE_ATTRIBUTE",,,,0,"File:PathAPI.ahk:FILE_ATTRIBUTE.ARCHIVE","AutoHotKeyClass:FILE_ATTRIBUTE:ARCHIVE"]]]]);

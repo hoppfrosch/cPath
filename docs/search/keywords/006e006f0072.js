@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("nor",["Constant"],[["NORMAL",,[["FILE_ATTRIBUTE",,,,0,"File:PathAPI.ahk:FILE_ATTRIBUTE.NORMAL","AutoHotKeyClass:FILE_ATTRIBUTE:NORMAL"]]]]);

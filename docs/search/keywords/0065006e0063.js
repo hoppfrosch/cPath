@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("enc",["Constant"],[["ENCRYPTED",,[["FILE_ATTRIBUTE",,,,0,"File:PathAPI.ahk:FILE_ATTRIBUTE.ENCRYPTED","AutoHotKeyClass:FILE_ATTRIBUTE:ENCRYPTED"]]]]);

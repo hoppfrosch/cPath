@@ -1,1 +1,0 @@
-NDSearch.OnPrefixDataLoaded("drv",["Variable"],[["DRV_VOL",,[["RE_PATH",,,,0,"File:cPath.ahk:RE_PATH.DRV_VOL","AutoHotKeyClass:RE_PATH:DRV_VOL"]]]]);

@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("rep",["Constant"],[["REPARSE_POINT",,[["FILE_ATTRIBUTE",,,,0,"File:PathAPI.ahk:FILE_ATTRIBUTE.REPARSE_POINT","AutoHotKeyClass:FILE_ATTRIBUTE:REPARSE_POINT"]]]]);

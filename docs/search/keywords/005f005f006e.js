@@ -1,1 +1,0 @@
-NDSearch.OnPrefixDataLoaded("__n",["Function"],[["__New",,[["Path",,,,0,"File:cPath.ahk:Path.__New","AutoHotKeyClass:Path:__New"]]]]);

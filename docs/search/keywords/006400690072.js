@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("dir",["Constant"],[["DIRECTORY",,[["FILE_ATTRIBUTE",,,,0,"File:PathAPI.ahk:FILE_ATTRIBUTE.DIRECTORY","AutoHotKeyClass:FILE_ATTRIBUTE:DIRECTORY"]]]]);
