@@ -36,6 +36,15 @@ for test, expected in data {
 	assert(res = expected, "PathIsDirectory('" test "') -> " res)
 }
 
+;/* -------------------------- PathIsDirectoryEmpty -------------------------- */
+data := Map()
+data["C:\Program Files"] := 0
+
+for test, expected in data {
+	res := PathIsDirectoryEmpty(test)
+	assert(res = expected, "PathIsDirectoryEmpty('" test "') -> " res)
+}
+
 ; ----------------------------- PathIsFileSpec -----------------------------
 data := Map()
 data["sample"] := 1
@@ -69,6 +78,18 @@ data["\\test\test.exe"] := 0
 for test, expected in data {
 	res := PathIsRelative(test)
 	assert(res = expected, "PathIsRelative('" test "') -> " res)
+} 
+
+;/* ------------------------------- PathIsRoot ------------------------------- */
+data := Map()
+data["C:\"] := 1
+data["\\test\"] := 0
+data["\\test\path"] := 1
+data["..\test.exe"] := 0
+
+for test, expected in data {
+	res := PathIsRoot(test)
+	assert(res = expected, "PathIsRoot('" test "') -> " res)
 } 
 
 ; --------------------------- PathIsSystemFolder ---------------------------

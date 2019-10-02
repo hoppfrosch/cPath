@@ -85,9 +85,15 @@ class FILE_ATTRIBUTE {
 	static VIRTUAL						:= 0x10000
 }
 
-; ***************************************************************************************************************
-; *** Functional interface to WIN API
-; ***************************************************************************************************************
+/* ********************************************************************** 
+Section: Shell Path Handling Functions
+
+Windows Shell path handling functions. The programming elements implemented here are exported by Shlwapi.dll 
+and defined in Shlwapi.h and Shlwapi.lib.
+
+References:
+	* <Microsoft Documentation: https://docs.microsoft.com/en-us/windows/win32/shell/shlwapi-path> 
+*/
 
 ;========================================================================
 /* 	Function: PathCanonicalize
@@ -166,11 +172,34 @@ Returns:
 
 References:
 	* <PathIsDirectory function: https://docs.microsoft.com/en-us/windows/win32/api/shlwapi/nf-shlwapi-pathisdirectorya>
-	* <Microsoft Documentation: https://docs.microsoft.com/en-us/windows/win32/shell/shlwapi-path>
 */
 PathIsDirectory(vPath)  {
 	vPath := PathFixSlashes(vPath)
 	ret := DllCall("SHLWAPI.DLL\PathIsDirectory", "Str", vpath)
+    Return ret
+}
+
+;========================================================================
+/* 	Function: PathIsDirectoryEmpty
+
+Determines whether a specified path is an empty directory.
+
+Parameters: 
+	vPath - contains the path to be tested.
+
+Returns:
+Returns (1) TRUE if vPath is an empty directory. Returns (0) FALSE if Path is not a directory, 
+or if it contains at least one file other than "." or "..".
+
+Remarks:
+	"C:\" is considered a directory.
+
+References:
+	* <PathIsDirectoryEmpty function: https://msdn.microsoft.com/en-us/ie/bb773623(v=vs.80)>
+*/
+PathIsDirectoryEmpty(vPath)  {
+	vPath := PathFixSlashes(vPath)
+	ret := DllCall("SHLWAPI.DLL\PathIsDirectoryEmpty", "Str", vpath)
     Return ret
 }
 
@@ -189,7 +218,6 @@ Returns:
 
 References:
 	* <PathIsFileSpec function: https://technet.microsoft.com/de-de/office/bb773627(v=vs.71)>
-	* <Microsoft Documentation: https://docs.microsoft.com/en-us/windows/win32/shell/shlwapi-path>
 */
 PathIsFileSpec(vPath)   {
 	vPath := PathFixSlashes(vPath)
@@ -212,7 +240,6 @@ Returns:
 
 References:
 	* <PathIsPrefix function: https://technet.microsoft.com/de-de/office/bb773650(v=vs.80).aspx>
-	* <Microsoft Documentation: https://docs.microsoft.com/en-us/windows/win32/shell/shlwapi-path>
 */
 PathIsPrefix(prefix,vPath)  {
 	vPath := PathFixSlashes(vPath)
@@ -233,11 +260,30 @@ Returns:
 
 References:
 	* <PathIsRelative function: https://msdn.microsoft.com/en-us/data/bb773660(v=vs.96).aspx>
-	* <Microsoft Documentation: https://docs.microsoft.com/en-us/windows/win32/shell/shlwapi-path>
 */
 PathIsRelative(vPath)   {
 	vPath := PathFixSlashes(vPath)
     ret := DllCall("SHLWAPI.DLL\PathIsRelative", "Str", vPath)
+	return ret
+}
+
+;========================================================================
+/* 	Function: PathIsRoot
+
+Determines whether a path string refers to the root of a volume.
+
+Parameters: 
+	vPath - contains the path to be validated.
+
+Returns:
+    Returns 1 (TRUE) if the specified path is a root, or 0 (FALSE) otherwise.
+
+References:
+	* <PathIsRoot function: https://docs.microsoft.com/en-us/windows/win32/api/shlwapi/nf-shlwapi-pathisroota>
+*/
+PathIsRoot(vPath)   {
+	vPath := PathFixSlashes(vPath)
+    ret := DllCall("SHLWAPI.DLL\PathIsRoot", "Str" , vPath)
 	return ret
 }
 
@@ -264,7 +310,6 @@ Returns:
 
 References:
 	* <PathIsSystemFolder function: https://docs.microsoft.com/de-de/windows/win32/api/shlwapi/nf-shlwapi-pathissystemfoldera>
-	* <Microsoft Documentation: https://docs.microsoft.com/en-us/windows/win32/shell/shlwapi-path>
 */
 PathIsSystemFolder(vPath := "",Attr := 0) {
 	vPath := PathFixSlashes(vPath)
@@ -284,7 +329,7 @@ Returns:
 	Returns 1 (TRUE) if the string is a valid UNC path; otherwise, 0 (FALSE)
 
 References:
-	* <Microsoft Documentation: https://docs.microsoft.com/en-us/windows/win32/shell/shlwapi-path>
+	* <PathIsUNC: https://msdn.microsoft.com/en-us/data/bb773712(v=vs.95).aspx>
 */
 PathIsUNC(vPath)    {
 	vPath := PathFixSlashes(vPath)
@@ -305,7 +350,6 @@ Returns:
 
 References:
 	* <PathIsUNCServer function: https://technet.microsoft.com/de-de/office/bb773722(v=vs.80).aspx>
-	* <Microsoft Documentation: https://docs.microsoft.com/en-us/windows/win32/shell/shlwapi-path> 
 */
 PathIsUNCServer(vPath)  {
 	vPath := PathFixSlashes(vPath)
@@ -326,7 +370,6 @@ Returns:
 
 References:
 	* <PathIsUNCServerShare function: https://msdn.microsoft.com/en-us/ie/bb773723(v=vs.80)>
-	* <Microsoft Documentation: https://docs.microsoft.com/en-us/windows/win32/shell/shlwapi-path> 
 */
 PathIsUNCServerShare(vPath) {
 	vPath := PathFixSlashes(vPath)
@@ -350,7 +393,7 @@ Returns:
     resulting relative path
 
 References:
-	* <Microsoft shlwapi-Documentation: https://docs.microsoft.com/en-us/windows/win32/shell/shlwapi-path>, 
+	* <PathRelativePathTo: https://docs.microsoft.com/en-us/windows/win32/api/shlwapi/nf-shlwapi-pathrelativepathtoa>
 */
 PathRelativePathTo(From,atrFrom,To,atrTo)  {
     static MAX_PATH := 255
@@ -366,10 +409,11 @@ PathRelativePathTo(From,atrFrom,To,atrTo)  {
 }
 
 
-; ***************************************************************************************************************
-; *** Tool - Functions
-; ***************************************************************************************************************
+/* ********************************************************************** 
+Section: Additional Path Handling Functions
 
+Additional path handling functions, which might be useful but not covered by shlwapi-path functionality
+*/
 ;========================================================================
 /* 	Function: PathCat
 
