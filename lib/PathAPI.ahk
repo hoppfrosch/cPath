@@ -288,6 +288,29 @@ PathIsRoot(vPath)   {
 }
 
 ;========================================================================
+/* 	Function: PathIsSameRoot 
+
+Compares two paths to determine if they have a common root component.
+
+Parameters: 
+	vPath1 - contains the first path to be validated.
+	vPath2 - contains the second path to be validated.
+
+Returns:
+    Returns 1 (TRUE) if both strings have the same root component, or 0 (FALSE) otherwise. 
+	If vPath1 contains only the server and share, this function also returns 0 (FALSE).
+
+References:
+	* <PathIsSameRoot  function: https://technet.microsoft.com/de-de/sysinternals/bb773687(v=vs.100)>
+*/
+PathIsSameRoot(vPath1, vPath2)   {
+	vPath1 := PathFixSlashes(vPath1)
+	vPath2 := PathFixSlashes(vPath2)
+    ret := DllCall("SHLWAPI.DLL\PathIsSameRoot", "Str", vPath1, "Str", vPath2)
+	return ret
+}
+
+;========================================================================
 /* 	Function: PathIsSystemFolder
 
 Determines if an existing folder contains the attributes that make it a system folder. Alternately, 

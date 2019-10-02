@@ -175,60 +175,66 @@
  <div class="CBody"><p>Determines whether a path string refers to the root of a volume.</p><div class="CHeading">Parameters</div><table class="CDefinitionList"><tr><td class="CDLEntry">vPath</td><td class="CDLDefinition"><p>contains the path to be validated.</p></td></tr></table><div class="CHeading">Returns</div><p>Returns 1 (TRUE) if the specified path is a root, or 0 (FALSE) otherwise.</p><div class="CHeading">References</div><ul><li><p><a href="https://docs.microsoft.com/en-us/windows/win32/api/shlwapi/nf-shlwapi-pathisroota" target="_top">PathIsRoot function</a></p></li></ul></div>
 </div>
 
-<a name="PathIsSystemFolder"></a><a name="Topic38"></a><div class="CTopic TFunction LAutoHotKey">
+<a name="PathIsSameRoot"></a><a name="Topic38"></a><div class="CTopic TFunction LAutoHotKey">
+ <div class="CTitle">PathIsSameRoot</div>
+ <div id="NDPrototype38" class="NDPrototype WideForm CStyle"><table><tr><td class="PBeforeParameters">PathIsSameRoot(</td><td class="PParametersParentCell"><table class="PParameters"><tr><td class="PName first last">vPath1,</td></tr><tr><td class="PName first last">vPath2</td></tr></table></td><td class="PAfterParameters">)</td></tr></table></div>
+ <div class="CBody"><p>Compares two paths to determine if they have a common root component.</p><div class="CHeading">Parameters</div><table class="CDefinitionList"><tr><td class="CDLEntry">vPath1</td><td class="CDLDefinition"><p>contains the first path to be validated.</p></td></tr><tr><td class="CDLEntry">vPath2</td><td class="CDLDefinition"><p>contains the second path to be validated.</p></td></tr></table><div class="CHeading">Returns</div><p>Returns 1 (TRUE) if both strings have the same root component, or 0 (FALSE) otherwise.&nbsp; If vPath1 contains only the server and share, this function also returns 0 (FALSE).</p><div class="CHeading">References</div><ul><li><p><a href="https://technet.microsoft.com/de-de/sysinternals/bb773687(v=vs.100)" target="_top">PathIsSameRoot function</a></p></li></ul></div>
+</div>
+
+<a name="PathIsSystemFolder"></a><a name="Topic39"></a><div class="CTopic TFunction LAutoHotKey">
  <div class="CTitle">PathIsSystemFolder</div>
- <div id="NDPrototype38" class="NDPrototype WideForm CStyle"><table><tr><td class="PBeforeParameters">PathIsSystemFolder(</td><td class="PParametersParentCell"><table class="PParameters"><tr><td class="PName first">vPath&nbsp;</td><td class="PDefaultValueSeparator">:=&nbsp;</td><td class="PDefaultValue last"><span class="SHString">&quot;&quot;</span>,</td></tr><tr><td class="PName first">Attr&nbsp;</td><td class="PDefaultValueSeparator">:=&nbsp;</td><td class="PDefaultValue last"><span class="SHNumber">0</span></td></tr></table></td><td class="PAfterParameters">)</td></tr></table></div>
+ <div id="NDPrototype39" class="NDPrototype WideForm CStyle"><table><tr><td class="PBeforeParameters">PathIsSystemFolder(</td><td class="PParametersParentCell"><table class="PParameters"><tr><td class="PName first">vPath&nbsp;</td><td class="PDefaultValueSeparator">:=&nbsp;</td><td class="PDefaultValue last"><span class="SHString">&quot;&quot;</span>,</td></tr><tr><td class="PName first">Attr&nbsp;</td><td class="PDefaultValueSeparator">:=&nbsp;</td><td class="PDefaultValue last"><span class="SHNumber">0</span></td></tr></table></td><td class="PAfterParameters">)</td></tr></table></div>
  <div class="CBody"><p>Determines if an existing folder contains the attributes that make it a system folder. Alternately, this function indicates if certain attributes qualify a folder to be a system folder.</p><div class="CHeading">Parameters</div><table class="CDefinitionList"><tr><td class="CDLEntry">vPath</td><td class="CDLDefinition"><p>A pointer to a null-terminated string of maximum length MAX_PATH that contains the name of an existing folder. The attributes for this folder will be retrieved and compared with those that define a system folder. If this folder contains the attributes to make it a system folder, the function returns nonzero. If this value is NULL, this function determines if the attributes passed in &lt;Attr&gt; qualify it to be a system folder.</p></td></tr><tr><td class="CDLEntry">Attr</td><td class="CDLDefinition"><p>The file attributes to be compared. Used only if pszPath is NULL. In that case, the attributes passed in this value are compared with those that qualify a folder as a system folder.&nbsp; If the attributes are sufficient to make this a system folder, this function returns nonzero. These attributes are the attributes that are returned from GetFileAttributes.</p></td></tr></table><div class="CHeading">Returns</div><p>Returns nonzero if the vPath or Attr represent a system folder, or 0 (zero) otherwise.</p><div class="CHeading">References</div><ul><li><p><a href="https://docs.microsoft.com/de-de/windows/win32/api/shlwapi/nf-shlwapi-pathissystemfoldera" target="_top">PathIsSystemFolder function</a></p></li></ul></div>
 </div>
 
-<a name="PathIsUNC"></a><a name="Topic39"></a><div class="CTopic TFunction LAutoHotKey">
+<a name="PathIsUNC"></a><a name="Topic40"></a><div class="CTopic TFunction LAutoHotKey">
  <div class="CTitle">PathIsUNC</div>
- <div id="NDPrototype39" class="NDPrototype WideForm CStyle"><table><tr><td class="PBeforeParameters">PathIsUNC(</td><td class="PParametersParentCell"><table class="PParameters"><tr><td class="PName first last">vPath</td></tr></table></td><td class="PAfterParameters">)</td></tr></table></div>
+ <div id="NDPrototype40" class="NDPrototype WideForm CStyle"><table><tr><td class="PBeforeParameters">PathIsUNC(</td><td class="PParametersParentCell"><table class="PParameters"><tr><td class="PName first last">vPath</td></tr></table></td><td class="PAfterParameters">)</td></tr></table></div>
  <div class="CBody"><p>Determines if a path string is a valid Universal Naming Convention (UNC) path, as opposed to a path based on a drive letter.</p><div class="CHeading">Parameters</div><table class="CDefinitionList"><tr><td class="CDLEntry">vPath</td><td class="CDLDefinition"><p>full path to verify.</p></td></tr></table><div class="CHeading">Returns</div><p>Returns 1 (TRUE) if the string is a valid UNC path; otherwise, 0 (FALSE)</p><div class="CHeading">References</div><ul><li><p><a href="https://msdn.microsoft.com/en-us/data/bb773712(v=vs.95).aspx" target="_top">PathIsUNC</a></p></li></ul></div>
 </div>
 
-<a name="PathIsUNCServer"></a><a name="Topic40"></a><div class="CTopic TFunction LAutoHotKey">
+<a name="PathIsUNCServer"></a><a name="Topic41"></a><div class="CTopic TFunction LAutoHotKey">
  <div class="CTitle">PathIsUNCServer</div>
- <div id="NDPrototype40" class="NDPrototype WideForm CStyle"><table><tr><td class="PBeforeParameters">PathIsUNCServer(</td><td class="PParametersParentCell"><table class="PParameters"><tr><td class="PName first last">vPath</td></tr></table></td><td class="PAfterParameters">)</td></tr></table></div>
+ <div id="NDPrototype41" class="NDPrototype WideForm CStyle"><table><tr><td class="PBeforeParameters">PathIsUNCServer(</td><td class="PParametersParentCell"><table class="PParameters"><tr><td class="PName first last">vPath</td></tr></table></td><td class="PAfterParameters">)</td></tr></table></div>
  <div class="CBody"><p>Determines if a string is a valid Universal Naming Convention (UNC) for a server path only.</p><div class="CHeading">Parameters</div><table class="CDefinitionList"><tr><td class="CDLEntry">vPath</td><td class="CDLDefinition"><p>full path to verify.</p></td></tr></table><div class="CHeading">Returns</div><p>Returns 1 (TRUE) if the string is a valid UNC path for a server only (no share name); otherwise, 0 (FALSE)</p><div class="CHeading">References</div><ul><li><p><a href="https://technet.microsoft.com/de-de/office/bb773722(v=vs.80).aspx" target="_top">PathIsUNCServer function</a></p></li></ul></div>
 </div>
 
-<a name="PathIsUNCServerShare"></a><a name="Topic41"></a><div class="CTopic TFunction LAutoHotKey">
+<a name="PathIsUNCServerShare"></a><a name="Topic42"></a><div class="CTopic TFunction LAutoHotKey">
  <div class="CTitle">PathIsUNCServerShare</div>
- <div id="NDPrototype41" class="NDPrototype WideForm CStyle"><table><tr><td class="PBeforeParameters">PathIsUNCServerShare(</td><td class="PParametersParentCell"><table class="PParameters"><tr><td class="PName first last">vPath</td></tr></table></td><td class="PAfterParameters">)</td></tr></table></div>
+ <div id="NDPrototype42" class="NDPrototype WideForm CStyle"><table><tr><td class="PBeforeParameters">PathIsUNCServerShare(</td><td class="PParametersParentCell"><table class="PParameters"><tr><td class="PName first last">vPath</td></tr></table></td><td class="PAfterParameters">)</td></tr></table></div>
  <div class="CBody"><p>Determines if a string is a valid Universal Naming Convention (UNC) share path, \\server\share.</p><div class="CHeading">Parameters</div><table class="CDefinitionList"><tr><td class="CDLEntry">vPath</td><td class="CDLDefinition"><p>full path to verify.</p></td></tr></table><div class="CHeading">Returns</div><p>Returns 1 (TRUE) if the string is in the form \\server\share; otherwise, 0 (FALSE)</p><div class="CHeading">References</div><ul><li><p><a href="https://msdn.microsoft.com/en-us/ie/bb773723(v=vs.80)" target="_top">PathIsUNCServerShare function</a></p></li></ul></div>
 </div>
 
-<a name="PathRelativePathTo"></a><a name="Topic42"></a><div class="CTopic TFunction LAutoHotKey">
+<a name="PathRelativePathTo"></a><a name="Topic43"></a><div class="CTopic TFunction LAutoHotKey">
  <div class="CTitle">PathRelativePathTo</div>
- <div id="NDPrototype42" class="NDPrototype WideForm CStyle"><table><tr><td class="PBeforeParameters">PathRelativePathTo(</td><td class="PParametersParentCell"><table class="PParameters"><tr><td class="PName first last">From,</td></tr><tr><td class="PName first last">atrFrom,</td></tr><tr><td class="PName first last">To,</td></tr><tr><td class="PName first last">atrTo</td></tr></table></td><td class="PAfterParameters">)</td></tr></table></div>
+ <div id="NDPrototype43" class="NDPrototype WideForm CStyle"><table><tr><td class="PBeforeParameters">PathRelativePathTo(</td><td class="PParametersParentCell"><table class="PParameters"><tr><td class="PName first last">From,</td></tr><tr><td class="PName first last">atrFrom,</td></tr><tr><td class="PName first last">To,</td></tr><tr><td class="PName first last">atrTo</td></tr></table></td><td class="PAfterParameters">)</td></tr></table></div>
  <div class="CBody"><p>Creates a relative path from one file or folder to another.&nbsp; For file attributes see <a href="../index.html#File:PathAPI.ahk:FILE_ATTRIBUTE" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,6);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >FILE_ATTRIBUTE</a></p><div class="CHeading">Parameters</div><table class="CDefinitionList"><tr><td class="CDLEntry">from</td><td class="CDLDefinition"><p>contains the path that defines the start of the relative path.</p></td></tr><tr><td class="CDLEntry">atrFrom</td><td class="CDLDefinition"><p>file attributes of &lt;from&gt;. If this value contains FILE_ATTRIBUTE_DIRECTORY, &lt;From&gt; is assumed to be a directory; otherwise, &lt;From&gt; is assumed to be a file.</p></td></tr><tr><td class="CDLEntry">to</td><td class="CDLDefinition"><p>contains the path that defines the endpoint of the relative</p></td></tr><tr><td class="CDLEntry">atrTo</td><td class="CDLDefinition"><p>file attributes of &lt;To&gt;. If this value contains FILE_ATTRIBUTE_DIRECTORY, &lt;To&gt; is assumed to be directory; otherwise, &lt;To&gt; is assumed to be a file.</p></td></tr></table><div class="CHeading">Returns</div><p>resulting relative path</p><div class="CHeading">References</div><ul><li><p><a href="https://docs.microsoft.com/en-us/windows/win32/api/shlwapi/nf-shlwapi-pathrelativepathtoa" target="_top">PathRelativePathTo</a></p></li></ul></div>
 </div>
 
-<a name="Additional_Path_Handling_Functions"></a><a name="Topic43"></a><div class="CTopic TSection LAutoHotKey">
+<a name="Additional_Path_Handling_Functions"></a><a name="Topic44"></a><div class="CTopic TSection LAutoHotKey">
  <div class="CTitle">Additional Path Handling Functions</div>
  <div class="CBody"><p>Additional path handling functions, which might be useful but not covered by shlwapi-path functionality</p></div>
 </div>
 
-<a name="Functions(2)"></a><a name="Topic44"></a><div class="CTopic TGroup LAutoHotKey">
+<a name="Functions(2)"></a><a name="Topic45"></a><div class="CTopic TGroup LAutoHotKey">
  <div class="CTitle">Functions</div>
 </div>
 
-<a name="PathCat"></a><a name="Topic45"></a><div class="CTopic TFunction LAutoHotKey">
+<a name="PathCat"></a><a name="Topic46"></a><div class="CTopic TFunction LAutoHotKey">
  <div class="CTitle">PathCat</div>
- <div id="NDPrototype45" class="NDPrototype WideForm CStyle"><table><tr><td class="PBeforeParameters">PathCat(</td><td class="PParametersParentCell"><table class="PParameters"><tr><td class="PName first last">path,</td></tr><tr><td class="PName first last">params *</td></tr></table></td><td class="PAfterParameters">)</td></tr></table></div>
+ <div id="NDPrototype46" class="NDPrototype WideForm CStyle"><table><tr><td class="PBeforeParameters">PathCat(</td><td class="PParametersParentCell"><table class="PParameters"><tr><td class="PName first last">path,</td></tr><tr><td class="PName first last">params *</td></tr></table></td><td class="PAfterParameters">)</td></tr></table></div>
  <div class="CBody"><p>Concatenates a path from several components using a variadic function</p><div class="CHeading">Parameters</div><table class="CDefinitionList"><tr><td class="CDLEntry">path</td><td class="CDLDefinition"><p>basepath</p></td></tr><tr><td class="CDLEntry">params *</td><td class="CDLDefinition"><p>Array of path elements to be concatenated</p></td></tr></table><div class="CHeading">Returns</div><p>concatenated path</p></div>
 </div>
 
-<a name="PathFixSlashes"></a><a name="Topic46"></a><div class="CTopic TFunction LAutoHotKey">
+<a name="PathFixSlashes"></a><a name="Topic47"></a><div class="CTopic TFunction LAutoHotKey">
  <div class="CTitle">PathFixSlashes</div>
- <div id="NDPrototype46" class="NDPrototype WideForm CStyle"><table><tr><td class="PBeforeParameters">PathFixSlashes(</td><td class="PParametersParentCell"><table class="PParameters"><tr><td class="PName first last">vPath</td></tr></table></td><td class="PAfterParameters">)</td></tr></table></div>
+ <div id="NDPrototype47" class="NDPrototype WideForm CStyle"><table><tr><td class="PBeforeParameters">PathFixSlashes(</td><td class="PParametersParentCell"><table class="PParameters"><tr><td class="PName first last">vPath</td></tr></table></td><td class="PAfterParameters">)</td></tr></table></div>
  <div class="CBody"><p>Fixes slashes in path by replacing forwarslashes with backslashes</p><div class="CHeading">Parameters</div><table class="CDefinitionList"><tr><td class="CDLEntry">path</td><td class="CDLDefinition"><p>path to be fixed</p></td></tr></table><div class="CHeading">Returns</div><p>path with fixed Slashes</p></div>
 </div>
 
-<a name="PathRelative"></a><a name="Topic47"></a><div class="CTopic TFunction LAutoHotKey last">
+<a name="PathRelative"></a><a name="Topic48"></a><div class="CTopic TFunction LAutoHotKey last">
  <div class="CTitle">PathRelative</div>
- <div id="NDPrototype47" class="NDPrototype WideForm CStyle"><table><tr><td class="PBeforeParameters">PathRelative(</td><td class="PParametersParentCell"><table class="PParameters"><tr><td class="PName first last">From,</td></tr><tr><td class="PName first last">To</td></tr></table></td><td class="PAfterParameters">)</td></tr></table></div>
+ <div id="NDPrototype48" class="NDPrototype WideForm CStyle"><table><tr><td class="PBeforeParameters">PathRelative(</td><td class="PParametersParentCell"><table class="PParameters"><tr><td class="PName first last">From,</td></tr><tr><td class="PName first last">To</td></tr></table></td><td class="PAfterParameters">)</td></tr></table></div>
  <div class="CBody"><p>Creates a relative path from one file or folder to another.</p><div class="CHeading">Parameters</div><table class="CDefinitionList"><tr><td class="CDLEntry">from</td><td class="CDLDefinition"><p>contains the path that defines the start of the relative path.</p></td></tr><tr><td class="CDLEntry">to</td><td class="CDLDefinition"><p>contains the path that defines the endpoint of the relative</p></td></tr></table><div class="CHeading">Returns</div><p>resulting relative path</p></div>
 </div>
 

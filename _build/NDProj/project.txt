@@ -1,4 +1,4 @@
-﻿Format: 2.0.2
+Format: 2.0.2
 
 # This is the file you use to provide information about your project.  It can
 # also be used to specify input and output settings so you don't have to
@@ -11,7 +11,7 @@
 Title: cPath
 Subtitle: Version 0.2.0
 
-Copyright: © 2019, Johannes Kilian, MIT License
+Copyright: � 2019, Johannes Kilian, MIT License
 
 Timestamp: dd.month.year
 #    m     - Single digit month, when possible.  January is "1".

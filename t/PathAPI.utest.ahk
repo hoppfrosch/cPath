@@ -92,6 +92,18 @@ for test, expected in data {
 	assert(res = expected, "PathIsRoot('" test "') -> " res)
 } 
 
+;/* ----------------------------- PathIsSameRoot ----------------------------- */
+arg1 := "C:\path1\one"
+arg2 := "C:\path2\two"
+expected := 1
+res := PathIsSameRoot(arg1, arg2)
+assert(res = expected, "PathIsSameRoot ('" arg1 "', '" arg2 "') -> " res)
+
+arg2 := "E:\acme\three"
+expected := 0
+res := PathIsSameRoot(arg1, arg2)
+assert(res = expected, "PathIsSameRoot ('" arg1 "', '" arg2 "') -> " res)
+
 ; --------------------------- PathIsSystemFolder ---------------------------
 data := Map()
 data["c:\Windows\assembly\"] := 1
