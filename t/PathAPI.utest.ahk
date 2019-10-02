@@ -55,6 +55,17 @@ for test, expected in data {
 	assert(res = expected, "PathIsFileSpec('" test "') -> " res)
 }
 
+;/* ---------------------------- PathIsNetworkPath --------------------------- */
+data := Map()
+data["C:\"] := 0
+data["X:\"] := 0
+data["\\test\"] := 1
+
+for test, expected in data {
+	res := PathIsNetworkPath(test)
+	assert(res = expected, "PathIsNetworkPath('" test "') -> " res)
+}
+
 ; ------------------------------ PathIsPrefix ------------------------------ 
 arg1 := "C:\"
 arg2 := "C:\test\Some\sample"
