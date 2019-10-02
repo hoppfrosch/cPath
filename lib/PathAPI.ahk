@@ -198,6 +198,29 @@ PathIsFileSpec(vPath)   {
 }
 
 ;========================================================================
+/* 	Function: PathIsPrefix
+
+Searches a path to determine if it contains a valid prefix of the type passed by pszPrefix. 
+A prefix is one of these types: "C:\\", ".", "..", "..\\".
+
+Parameters: 
+	prefix - prefix for which to search.
+	vPath - full path for which to search.
+
+Returns:
+    Returns 1 (TRUE) if the compared path is the full prefix for the path, or 0 (FALSE) otherwise.
+
+References:
+	* <PathIsPrefix function: https://technet.microsoft.com/de-de/office/bb773650(v=vs.80).aspx>
+	* <Microsoft Documentation: https://docs.microsoft.com/en-us/windows/win32/shell/shlwapi-path>
+*/
+PathIsPrefix(prefix,vPath)  {
+	vPath := PathFixSlashes(vPath)
+    ret := DllCall("SHLWAPI.DLL\PathIsPrefix", "Str", prefix, "Str", vPath)
+	return ret
+}
+
+;========================================================================
 /* 	Function: PathIsSystemFolder
 
 Determines if an existing folder contains the attributes that make it a system folder. Alternately, 
