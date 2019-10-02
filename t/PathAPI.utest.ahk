@@ -25,10 +25,24 @@ res := PathFileExists("c:\Windows\XXregedit.exeXX")
 assert(res = 0, "<PathFileExists> (Input <c:\Windows\XXregeditXX.exe)")
 
 ; ----------------------------- PathIsDirectory ----------------------------
-res := PathIsDirectory("C:\Program Files")
-assert(res = FILE_ATTRIBUTE.DIRECTORY , "<PathIsDirectory> (Input <C:\Program Files>)")
-res := PathIsDirectory("C:\X1234")
-assert(res != FILE_ATTRIBUTE.DIRECTORY, "<PathIsDirectory> (Input <C:\X1234>)")
+data := Map()
+data["C:\Program Files"] := FILE_ATTRIBUTE.DIRECTORY
+data["C:\X1234"] := 0
+
+for test, expected in data {
+	res := PathIsDirectory(test)
+	assert(res = expected, "PathIsDirectory('" test "') -> " res)
+}
+
+; ----------------------------- PathIsFileSpec -----------------------------
+data := Map()
+data["sample"] := 1
+data["C:\TEST\sample"] := 0
+
+for test, expected in data {
+	res := PathIsFileSpec(test)
+	assert(res = expected, "PathIsFileSpec('" test "') -> " res)
+}
 
 ; --------------------------- PathIsSystemFolder ---------------------------
 data := Map()
