@@ -226,6 +226,37 @@ PathIsFileSpec(vPath)   {
 }
 
 ;========================================================================
+/* 	Function: PathIsNetworkPath
+
+Determines whether a path string represents a network resource.
+
+Parameters: 
+	vPath - contains the path to be validated.
+
+Returns:
+    Returns 1 (TRUE) if the string represents a network resource,, or 0 (FALSE) otherwise.
+
+Remarks:
+	PathIsNetworkPath interprets the following two types of paths as network paths.
+	
+		* Paths that begin with two backslash characters (\\) are interpreted as Universal Naming Convention (UNC) paths.
+    	* Paths that begin with a letter followed by a colon (:) are interpreted as a mounted network drive. However, 
+		PathIsNetworkPath cannot recognize a network drive mapped to a drive letter through the Microsoft MS-DOS SUBST 
+		command or the DefineDosDevice function.
+
+Note:
+	The function does not verify that the specified network resource exists, is currently accessible, or that the user has sufficient permissions to access it.
+
+References:
+	* <PathIsNetworkPath function: https://msdn.microsoft.com/en-us/ie/bb773640(v=vs.80)>
+*/
+PathIsNetworkPath(vPath)   {
+	vPath := PathFixSlashes(vPath)
+    ret := DllCall("SHLWAPI.DLL\PathIsNetworkPath", "Str" , vPath)
+	return ret
+}
+
+;========================================================================
 /* 	Function: PathIsPrefix
 
 Searches a path to determine if it contains a valid prefix of the type passed by pszPrefix. 
