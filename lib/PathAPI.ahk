@@ -165,12 +165,36 @@ Returns:
     16 (FILE_ATTRIBUTE.DIRECTORY) if the path is a valid directory; otherwise, 0 (FALSE).
 
 References:
-	* <Microsoft Documentation: https://docs.microsoft.com/en-us/windows/win32/shell/shlwapi-path>, 
+	* <PathIsDirectory function: https://docs.microsoft.com/en-us/windows/win32/api/shlwapi/nf-shlwapi-pathisdirectorya>
+	* <Microsoft Documentation: https://docs.microsoft.com/en-us/windows/win32/shell/shlwapi-path>
 */
 PathIsDirectory(vPath)  {
 	vPath := PathFixSlashes(vPath)
 	ret := DllCall("SHLWAPI.DLL\PathIsDirectory", "Str", vpath)
     Return ret
+}
+
+;========================================================================
+/* 	Function: PathIsFileSpec
+
+Searches a path for any path-delimiting characters (for example, ':' or '\' ). If there 
+are no path-delimiting characters present, the path is considered to be a File Spec path.
+
+Parameters: 
+	vPath - full path of the object to verify.
+
+Returns:
+    Returns (1) TRUE if there are no path-delimiting characters within the path, 
+	or (0) FALSE if there are path-delimiting characters.
+
+References:
+	* <PathIsFileSpec function: https://technet.microsoft.com/de-de/office/bb773627(v=vs.71)>
+	* <Microsoft Documentation: https://docs.microsoft.com/en-us/windows/win32/shell/shlwapi-path>
+*/
+PathIsFileSpec(vPath)   {
+	vPath := PathFixSlashes(vPath)
+    ret := DllCall("SHLWAPI.DLL\PathIsFileSpec", "Str", vPath)
+	return ret
 }
 
 ;========================================================================
