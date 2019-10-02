@@ -58,6 +58,19 @@ expected := 0
 res := PathIsPrefix(arg1, arg2)
 assert(res = expected, "PathIsPrefix('" arg1 "', '" arg2 "') -> " res)
 
+;/* ----------------------------- PathIsRelative ----------------------------- */
+data := Map()
+data["test.exe"] := 1
+data["C:\test.exe"] := 0
+data[".\test.exe"] := 1
+data["..\test.exe"] := 1
+data["\\test\test.exe"] := 0
+
+for test, expected in data {
+	res := PathIsRelative(test)
+	assert(res = expected, "PathIsRelative('" test "') -> " res)
+} 
+
 ; --------------------------- PathIsSystemFolder ---------------------------
 data := Map()
 data["c:\Windows\assembly\"] := 1

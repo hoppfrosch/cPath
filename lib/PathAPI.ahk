@@ -221,6 +221,27 @@ PathIsPrefix(prefix,vPath)  {
 }
 
 ;========================================================================
+/* 	Function: PathIsRelative
+
+Searches a path and determines if it is relative.
+
+Parameters: 
+	vPath - full path for which to search.
+
+Returns:
+    Returns 1 (TRUE) if the path is relative, or 0 (FALSE) if it is absolute.
+
+References:
+	* <PathIsRelative function: https://msdn.microsoft.com/en-us/data/bb773660(v=vs.96).aspx>
+	* <Microsoft Documentation: https://docs.microsoft.com/en-us/windows/win32/shell/shlwapi-path>
+*/
+PathIsRelative(vPath)   {
+	vPath := PathFixSlashes(vPath)
+    ret := DllCall("SHLWAPI.DLL\PathIsRelative", "Str", vPath)
+	return ret
+}
+
+;========================================================================
 /* 	Function: PathIsSystemFolder
 
 Determines if an existing folder contains the attributes that make it a system folder. Alternately, 
