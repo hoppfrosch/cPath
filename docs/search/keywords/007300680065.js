@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("she",["Section"],[["Shell",,[[,"Shell Path Handling Functions",,,0,"File:PathAPI.ahk:Shell_Path_Handling_Functions"]]]]);
