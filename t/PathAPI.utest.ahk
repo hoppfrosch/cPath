@@ -30,6 +30,17 @@ assert(res = FILE_ATTRIBUTE.DIRECTORY , "<PathIsDirectory> (Input <C:\Program Fi
 res := PathIsDirectory("C:\X1234")
 assert(res != FILE_ATTRIBUTE.DIRECTORY, "<PathIsDirectory> (Input <C:\X1234>)")
 
+; --------------------------- PathIsSystemFolder ---------------------------
+data := Map()
+data["c:\Windows\assembly\"] := 1
+data["c:\temp\"] := 0
+data["C:"] := 0
+
+for test, expected in data {
+	res := PathIsSystemFolder(test)
+	assert(res = expected, "PathIsSystemFolder('" test "') -> " res)
+} 
+
 ; ------------------------------- PathIsUNC --------------------------------
 data := Map()
 data["\\path1\path2"] := 1

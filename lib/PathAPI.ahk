@@ -174,6 +174,37 @@ PathIsDirectory(vPath)  {
 }
 
 ;========================================================================
+/* 	Function: PathIsSystemFolder
+
+Determines if an existing folder contains the attributes that make it a system folder. Alternately, 
+this function indicates if certain attributes qualify a folder to be a system folder.
+
+Parameters: 
+	vPath - A pointer to a null-terminated string of maximum length MAX_PATH that contains the 
+	name of an existing folder. The attributes for this folder will be retrieved and compared with 
+	those that define a system folder. If this folder contains the attributes to make it a system 
+	folder, the function returns nonzero. If this value is NULL, this function determines if the 
+	attributes passed in <Attr> qualify it to be a system folder.
+
+	Attr - The file attributes to be compared. Used only if pszPath is NULL. In that case, the 
+	attributes passed in this value are compared with those that qualify a folder as a system folder. 
+	If the attributes are sufficient to make this a system folder, this function returns nonzero. These 
+	attributes are the attributes that are returned from GetFileAttributes.
+
+Returns:
+    Returns nonzero if the vPath or Attr represent a system folder, or 0 (zero) otherwise.
+
+References:
+	* <PathIsSystemFolder function: https://docs.microsoft.com/de-de/windows/win32/api/shlwapi/nf-shlwapi-pathissystemfoldera>
+	* <Microsoft Documentation: https://docs.microsoft.com/en-us/windows/win32/shell/shlwapi-path>
+*/
+PathIsSystemFolder(vPath := "",Attr := 0) {
+	vPath := PathFixSlashes(vPath)
+   	ret := DllCall("SHLWAPI.DLL\PathIsSystemFolder", "Str", vPath, "UInt", Attr)
+	return ret
+}
+
+;========================================================================
 /* 	Function: PathIsUNC
 
 Determines if a path string is a valid Universal Naming Convention (UNC) path, as opposed to a path based on a drive letter.
@@ -185,7 +216,7 @@ Returns:
 	Returns 1 (TRUE) if the string is a valid UNC path; otherwise, 0 (FALSE)
 
 References:
-	* <Microsoft Documentation: https://docs.microsoft.com/en-us/windows/win32/shell/shlwapi-path>, 
+	* <Microsoft Documentation: https://docs.microsoft.com/en-us/windows/win32/shell/shlwapi-path>
 */
 PathIsUNC(vPath)    {
 	vPath := PathFixSlashes(vPath)
