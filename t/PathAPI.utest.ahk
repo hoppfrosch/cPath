@@ -1,6 +1,10 @@
 #include %A_ScriptDir%\..\lib\PathAPI.ahk
 #Warn All
 
+global n_assert_fail := 0
+global n_assert_success := 0
+global n_assert := 0
+
 OutputDebug "DBGVIEWCLEAR"
 
 ; -----------------------------------------------------
@@ -101,15 +105,22 @@ expected := "..\temp3\temp4"
 strResult := PathRelativePathTo("C:\Temp1\Temp2",FILE_ATTRIBUTE.DIRECTORY,"C:\Temp1\Temp3\Temp4",FILE_ATTRIBUTE.DIRECTORY) 
 assert(StrCompare(strResult,expected) = 0, "<PathRelativePathTo> (Result <" strResult "> <=> Expected <" expected ">)")
 
-
+OutputDebug "*********************************************************************************************************"
+OutputDebug "*** UnitTest-Summary: " n_assert " overall - " n_assert_fail " fail - " n_assert_success " success *****"
+OutputDebug "*********************************************************************************************************"
 return
 
 assert(test_ok, message) {
-	static n_assert := 0
+	global 
 	n_assert++
 	str := "SUCCESS"
-	If (test_ok != 1)
+	If (test_ok != 1) {
 		str := "FAIL"
+		n_assert_fail++
+	}
+	else {
+		n_assert_success++
+	}
 
 	OutputDebug ("(" n_assert ") " str " - " message) 
 }
