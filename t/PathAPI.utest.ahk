@@ -7,13 +7,11 @@ global n_assert := 0
 
 OutputDebug "DBGVIEWCLEAR"
 
-; -----------------------------------------------------
-expected := "C:\tmp\test.txt"
-
 OutputDebug "**********************************************************************"
 OutputDebug "****** Testing functional interface **********************************"
 OutputDebug "**********************************************************************"
 
+expected := "C:\tmp\test.txt"
 ; ---------------------------- PathCanonicalize ---------------------------- 
 strResult := PathCanonicalize("C:/tmp/..\test/../tmp/test.txt")
 assert(StrCompare(strResult,expected) = 0, "<PathCanonicalize> (Result <" strResult "> <=> Expected <" expected ">)")
@@ -47,6 +45,18 @@ for test, expected in data {
 	res := PathIsFileSpec(test)
 	assert(res = expected, "PathIsFileSpec('" test "') -> " res)
 }
+
+; ------------------------------ PathIsPrefix ------------------------------ 
+arg1 := "C:\"
+arg2 := "C:\test\Some\sample"
+expected := 1
+res := PathIsPrefix(arg1, arg2)
+assert(res = expected, "PathIsPrefix('" arg1 "', '" arg2 "') -> " res)
+
+arg2 := "sample"
+expected := 0
+res := PathIsPrefix(arg1, arg2)
+assert(res = expected, "PathIsPrefix('" arg1 "', '" arg2 "') -> " res)
 
 ; --------------------------- PathIsSystemFolder ---------------------------
 data := Map()
@@ -105,6 +115,10 @@ expected := "..\temp3\temp4"
 strResult := PathRelativePathTo("C:\Temp1\Temp2",FILE_ATTRIBUTE.DIRECTORY,"C:\Temp1\Temp3\Temp4",FILE_ATTRIBUTE.DIRECTORY) 
 assert(StrCompare(strResult,expected) = 0, "<PathRelativePathTo> (Result <" strResult "> <=> Expected <" expected ">)")
 
+
+; -------------------------------------------------------------------------- 
+;                                   Summary                                 
+; -------------------------------------------------------------------------- 
 OutputDebug "*********************************************************************************************************"
 OutputDebug "*** UnitTest-Summary: " n_assert " overall - " n_assert_fail " fail - " n_assert_success " success *****"
 OutputDebug "*********************************************************************************************************"
