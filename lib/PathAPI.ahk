@@ -96,6 +96,32 @@ References:
 */
 
 ;========================================================================
+/* 	Function: PathAddBackslash
+
+Adds a backslash to the end of a string to create the correct syntax for a path. If the source path already has a 
+trailing backslash, no backslash will be added.
+
+Note:
+Misuse of this function can lead to a buffer overrun. We recommend the use of the safer <PathCchAddBackslash> 
+or <PathCchAddBackslashEx> function in its place.
+
+Parameters: 
+	path - full path. The size of this buffer must be set to MAX_PATH to ensure that it is large enough to hold the returned string.
+
+Returns:
+    when this function returns successfully, points to the new string's terminating null character. If the backslash 
+	could not be appended due to inadequate buffer size, this value is NULL.
+
+References:
+	* <PathAddBackslash: https://technet.microsoft.com/de-de/evalcenter/bb773561(v=vs.80)> 
+*/
+PathAddBackslash(vPath) {
+	vPath := PathFixSlashes(vPath)
+    Ret := DllCall("SHLWAPI.DLL\PathAddBackslash", "Str", vPath)
+	Return vPath
+}
+
+;========================================================================
 /* 	Function: PathCanonicalize
 
 Simplifies a path by removing navigation elements such as "." and ".." to produce a direct, well-formed path.
@@ -107,7 +133,7 @@ Returns:
     canonicalized path
 
 References:
-	* <Microsoft Documentation: https://docs.microsoft.com/en-us/windows/win32/shell/shlwapi-path>, 
+	* <PathCanonicalize: https://docs.microsoft.com/en-us/windows/win32/api/shlwapi/nf-shlwapi-pathcanonicalizea>
 */
 PathCanonicalize(vPath) {
 	MAX_PATH := 255

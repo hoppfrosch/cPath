@@ -11,20 +11,35 @@ OutputDebug "*******************************************************************
 OutputDebug "****** Testing functional interface **********************************"
 OutputDebug "**********************************************************************"
 
-expected := "C:\tmp\test.txt"
+; /* ---------------------------- PathAddBackslash ---------------------------- */
+data := Map()
+data["C:\dir_name\dir_name\file_name"] := "C:\dir_name\dir_name\file_name\"
+data["C:\dir_name\dir_name\file_name\"] := "C:\dir_name\dir_name\file_name\"
+
+for test, expected in data {
+	res := PathAddBackslash(test)
+	assert(StrCompare(res,expected) = 0, "PathAddBackslash('" test "') -> " res)
+}
+
 ; ---------------------------- PathCanonicalize ---------------------------- 
+expected := "C:\tmp\test.txt"
 strResult := PathCanonicalize("C:/tmp/..\test/../tmp/test.txt")
 assert(StrCompare(strResult,expected) = 0, "<PathCanonicalize> (Result <" strResult "> <=> Expected <" expected ">)")
 
 ; ------------------------------- PathCombine ------------------------------
+expected := "C:\tmp\test.txt"
 strResult := PathCombine("C:\tmp", "test.txt")
 assert(StrCompare(strResult,expected) = 0, "<PathCombine> (Result <" strResult "> <=> Expected <" expected ">)")
 
 ; ----------------------------- PathFileExists -----------------------------
-res := PathFileExists("c:\Windows\regedit.exe")
-assert(res = 1, "<PathFileExists> (Input <c:\Windows\regedit.exe)")
-res := PathFileExists("c:\Windows\XXregedit.exeXX")
-assert(res = 0, "<PathFileExists> (Input <c:\Windows\XXregeditXX.exe)")
+data := Map()
+data["c:\Windows\regedit.exe"] := 1
+data["c:\Windows\MyFantasy.exe"] := 0
+
+for test, expected in data {
+	res := PathFileExists(test)
+	assert(res = expected, "PathFileExists('" test "') -> " res)
+}
 
 ; ----------------------------- PathIsDirectory ----------------------------
 data := Map()
