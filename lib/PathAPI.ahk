@@ -85,9 +85,65 @@ class FILE_ATTRIBUTE {
 	static VIRTUAL						:= 0x10000
 }
 
-; ***************************************************************************************************************
-; *** Functional interface to WIN API
-; ***************************************************************************************************************
+/* ********************************************************************** 
+Section: Shell Path Handling Functions
+
+Windows Shell path handling functions. The programming elements implemented here are exported by Shlwapi.dll 
+and defined in Shlwapi.h and Shlwapi.lib.
+
+References:
+	* <Microsoft Documentation: https://docs.microsoft.com/en-us/windows/win32/shell/shlwapi-path> 
+*/
+
+;========================================================================
+/* 	Function: PathAddBackslash
+
+Adds a backslash to the end of a string to create the correct syntax for a path. If the source path already has a 
+trailing backslash, no backslash will be added.
+
+Note:
+Misuse of this function can lead to a buffer overrun. We recommend the use of the safer <PathCchAddBackslash> 
+or <PathCchAddBackslashEx> function in its place.
+
+Parameters: 
+	path - full path. The size of this buffer must be set to MAX_PATH to ensure that it is large enough to hold the returned string.
+
+Returns:
+    when this function returns successfully, points to the new string's terminating null character. If the backslash 
+	could not be appended due to inadequate buffer size, this value is NULL.
+
+References:
+	* <PathAddBackslash: https://technet.microsoft.com/de-de/evalcenter/bb773561(v=vs.80)> 
+*/
+PathAddBackslash(vPath) {
+	vPath := PathFixSlashes(vPath)
+    Ret := DllCall("SHLWAPI.DLL\PathAddBackslash", "Str", vPath)
+	Return vPath
+}
+
+;========================================================================
+/* 	Function: PathAppend
+
+Appends one path to the end of another.
+
+Note:
+Misuse of this function can lead to a buffer overrun. We recommend the use of the safer <PathCchAppend> 
+or <PathCchAppendEx> function in its place.
+
+Parameters: 
+	dirname - string of maximum length MAX_PATH that contains the path to be appendeded to.
+	dirmore - string of maximum length MAX_PATH that contains the path to be appended.
+
+Returns:
+    concatenated path string
+
+References:
+	* <PathAppend: https://docs.microsoft.com/en-us/windows/win32/api/shlwapi/nf-shlwapi-pathappenda>
+*/
+PathAppend(dirname, dirmore) {
+	ret := dllCall("shlwapi.dll\PathAppend", "Str", dirname, "Str", dirmore)	
+	return dirname
+}
 
 ;========================================================================
 /* 	Function: PathCanonicalize
@@ -101,7 +157,7 @@ Returns:
     canonicalized path
 
 References:
-	* <Microsoft Documentation: https://docs.microsoft.com/en-us/windows/win32/shell/shlwapi-path>, 
+	* <PathCanonicalize: https://docs.microsoft.com/en-us/windows/win32/api/shlwapi/nf-shlwapi-pathcanonicalizea>
 */
 PathCanonicalize(vPath) {
 	MAX_PATH := 255
@@ -124,7 +180,7 @@ Returns:
     concatenated path string
 
 References:
-	* <Microsoft Documentation: https://docs.microsoft.com/en-us/windows/win32/shell/shlwapi-path>, 
+	* <PathCombine: https://docs.microsoft.com/en-us/windows/win32/api/shlwapi/nf-shlwapi-pathcombinea>
 */
 PathCombine(dirname, filename) {
 	static MAX_PATH := 255
@@ -145,7 +201,7 @@ Returns:
     1 (TRUE) if the file exists; otherwise, 0 (FALSE).
 
 References:
-	* <Microsoft Documentation: https://docs.microsoft.com/en-us/windows/win32/shell/shlwapi-path>, 
+	* <PathFileExists: https://docs.microsoft.com/en-us/windows/win32/api/shlwapi/nf-shlwapi-pathfileexistsa>
 
 */
 PathFileExists(vPath) {
@@ -165,12 +221,264 @@ Returns:
     16 (FILE_ATTRIBUTE.DIRECTORY) if the path is a valid directory; otherwise, 0 (FALSE).
 
 References:
-	* <Microsoft Documentation: https://docs.microsoft.com/en-us/windows/win32/shell/shlwapi-path>, 
+	* <PathIsDirectory function: https://docs.microsoft.com/en-us/windows/win32/api/shlwapi/nf-shlwapi-pathisdirectorya>
 */
 PathIsDirectory(vPath)  {
 	vPath := PathFixSlashes(vPath)
 	ret := DllCall("SHLWAPI.DLL\PathIsDirectory", "Str", vpath)
     Return ret
+}
+
+;========================================================================
+/* 	Function: PathIsDirectoryEmpty
+
+Determines whether a specified path is an empty directory.
+
+Parameters: 
+	vPath - contains the path to be tested.
+
+Returns:
+Returns (1) TRUE if vPath is an empty directory. Returns (0) FALSE if Path is not a directory, 
+or if it contains at least one file other than "." or "..".
+
+Remarks:
+	"C:\" is considered a directory.
+
+References:
+	* <PathIsDirectoryEmpty function: https://msdn.microsoft.com/en-us/ie/bb773623(v=vs.80)>
+*/
+PathIsDirectoryEmpty(vPath)  {
+	vPath := PathFixSlashes(vPath)
+	ret := DllCall("SHLWAPI.DLL\PathIsDirectoryEmpty", "Str", vpath)
+    Return ret
+}
+
+;========================================================================
+/* 	Function: PathIsFileSpec
+
+Searches a path for any path-delimiting characters (for example, ':' or '\' ). If there 
+are no path-delimiting characters present, the path is considered to be a File Spec path.
+
+Parameters: 
+	vPath - full path of the object to verify.
+
+Returns:
+    Returns (1) TRUE if there are no path-delimiting characters within the path, 
+	or (0) FALSE if there are path-delimiting characters.
+
+References:
+	* <PathIsFileSpec function: https://technet.microsoft.com/de-de/office/bb773627(v=vs.71)>
+*/
+PathIsFileSpec(vPath)   {
+	vPath := PathFixSlashes(vPath)
+    ret := DllCall("SHLWAPI.DLL\PathIsFileSpec", "Str", vPath)
+	return ret
+}
+
+;========================================================================
+/* 	Function: PathIsNetworkPath
+
+Determines whether a path string represents a network resource.
+
+Parameters: 
+	vPath - contains the path to be validated.
+
+Returns:
+    Returns 1 (TRUE) if the string represents a network resource,, or 0 (FALSE) otherwise.
+
+Remarks:
+	PathIsNetworkPath interprets the following two types of paths as network paths.
+	
+		* Paths that begin with two backslash characters (\\) are interpreted as Universal Naming Convention (UNC) paths.
+    	* Paths that begin with a letter followed by a colon (:) are interpreted as a mounted network drive. However, 
+		PathIsNetworkPath cannot recognize a network drive mapped to a drive letter through the Microsoft MS-DOS SUBST 
+		command or the DefineDosDevice function.
+
+Note:
+	The function does not verify that the specified network resource exists, is currently accessible, or that the user has sufficient permissions to access it.
+
+References:
+	* <PathIsNetworkPath function: https://msdn.microsoft.com/en-us/ie/bb773640(v=vs.80)>
+*/
+PathIsNetworkPath(vPath)   {
+	vPath := PathFixSlashes(vPath)
+    ret := DllCall("SHLWAPI.DLL\PathIsNetworkPath", "Str" , vPath)
+	return ret
+}
+
+;========================================================================
+/* 	Function: PathIsPrefix
+
+Searches a path to determine if it contains a valid prefix of the type passed by pszPrefix. 
+A prefix is one of these types: "C:\\", ".", "..", "..\\".
+
+Parameters: 
+	prefix - prefix for which to search.
+	vPath - full path for which to search.
+
+Returns:
+    Returns 1 (TRUE) if the compared path is the full prefix for the path, or 0 (FALSE) otherwise.
+
+References:
+	* <PathIsPrefix function: https://technet.microsoft.com/de-de/office/bb773650(v=vs.80).aspx>
+*/
+PathIsPrefix(prefix,vPath)  {
+	vPath := PathFixSlashes(vPath)
+    ret := DllCall("SHLWAPI.DLL\PathIsPrefix", "Str", prefix, "Str", vPath)
+	return ret
+}
+
+;========================================================================
+/* 	Function: PathIsRelative
+
+Searches a path and determines if it is relative.
+
+Parameters: 
+	vPath - full path for which to search.
+
+Returns:
+    Returns 1 (TRUE) if the path is relative, or 0 (FALSE) if it is absolute.
+
+References:
+	* <PathIsRelative function: https://msdn.microsoft.com/en-us/data/bb773660(v=vs.96).aspx>
+*/
+PathIsRelative(vPath)   {
+	vPath := PathFixSlashes(vPath)
+    ret := DllCall("SHLWAPI.DLL\PathIsRelative", "Str", vPath)
+	return ret
+}
+
+;========================================================================
+/* 	Function: PathIsRoot
+
+Determines whether a path string refers to the root of a volume.
+
+Parameters: 
+	vPath - contains the path to be validated.
+
+Returns:
+    Returns 1 (TRUE) if the specified path is a root, or 0 (FALSE) otherwise.
+
+References:
+	* <PathIsRoot function: https://docs.microsoft.com/en-us/windows/win32/api/shlwapi/nf-shlwapi-pathisroota>
+*/
+PathIsRoot(vPath)   {
+	vPath := PathFixSlashes(vPath)
+    ret := DllCall("SHLWAPI.DLL\PathIsRoot", "Str" , vPath)
+	return ret
+}
+
+;========================================================================
+/* 	Function: PathIsSameRoot 
+
+Compares two paths to determine if they have a common root component.
+
+Parameters: 
+	vPath1 - contains the first path to be validated.
+	vPath2 - contains the second path to be validated.
+
+Returns:
+    Returns 1 (TRUE) if both strings have the same root component, or 0 (FALSE) otherwise. 
+	If vPath1 contains only the server and share, this function also returns 0 (FALSE).
+
+References:
+	* <PathIsSameRoot  function: https://technet.microsoft.com/de-de/sysinternals/bb773687(v=vs.100)>
+*/
+PathIsSameRoot(vPath1, vPath2)   {
+	vPath1 := PathFixSlashes(vPath1)
+	vPath2 := PathFixSlashes(vPath2)
+    ret := DllCall("SHLWAPI.DLL\PathIsSameRoot", "Str", vPath1, "Str", vPath2)
+	return ret
+}
+
+;========================================================================
+/* 	Function: PathIsSystemFolder
+
+Determines if an existing folder contains the attributes that make it a system folder. Alternately, 
+this function indicates if certain attributes qualify a folder to be a system folder.
+
+Parameters: 
+	vPath - A pointer to a null-terminated string of maximum length MAX_PATH that contains the 
+	name of an existing folder. The attributes for this folder will be retrieved and compared with 
+	those that define a system folder. If this folder contains the attributes to make it a system 
+	folder, the function returns nonzero. If this value is NULL, this function determines if the 
+	attributes passed in <Attr> qualify it to be a system folder.
+
+	Attr - The file attributes to be compared. Used only if pszPath is NULL. In that case, the 
+	attributes passed in this value are compared with those that qualify a folder as a system folder. 
+	If the attributes are sufficient to make this a system folder, this function returns nonzero. These 
+	attributes are the attributes that are returned from GetFileAttributes.
+
+Returns:
+    Returns nonzero if the vPath or Attr represent a system folder, or 0 (zero) otherwise.
+
+References:
+	* <PathIsSystemFolder function: https://docs.microsoft.com/de-de/windows/win32/api/shlwapi/nf-shlwapi-pathissystemfoldera>
+*/
+PathIsSystemFolder(vPath := "",Attr := 0) {
+	vPath := PathFixSlashes(vPath)
+   	ret := DllCall("SHLWAPI.DLL\PathIsSystemFolder", "Str", vPath, "UInt", Attr)
+	return ret
+}
+
+;========================================================================
+/* 	Function: PathIsUNC
+
+Determines if a path string is a valid Universal Naming Convention (UNC) path, as opposed to a path based on a drive letter.
+
+Parameters: 
+	vPath - full path to verify.
+
+Returns:
+	Returns 1 (TRUE) if the string is a valid UNC path; otherwise, 0 (FALSE)
+
+References:
+	* <PathIsUNC: https://msdn.microsoft.com/en-us/data/bb773712(v=vs.95).aspx>
+*/
+PathIsUNC(vPath)    {
+	vPath := PathFixSlashes(vPath)
+    ret := DllCall("SHLWAPI.DLL\PathIsUNC", "Str", vPath)
+	return ret
+}
+
+;========================================================================
+/* 	Function: PathIsUNCServer
+
+Determines if a string is a valid Universal Naming Convention (UNC) for a server path only.
+
+Parameters: 
+	vPath - full path to verify.
+
+Returns:
+	Returns 1 (TRUE) if the string is a valid UNC path for a server only (no share name); otherwise, 0 (FALSE)
+
+References:
+	* <PathIsUNCServer function: https://technet.microsoft.com/de-de/office/bb773722(v=vs.80).aspx>
+*/
+PathIsUNCServer(vPath)  {
+	vPath := PathFixSlashes(vPath)
+    ret := DllCall("SHLWAPI.DLL\PathIsUNCServer", "Str",vPath)
+	return ret
+}
+
+;========================================================================
+/* 	Function: PathIsUNCServerShare
+
+Determines if a string is a valid Universal Naming Convention (UNC) share path, \\server\share.
+
+Parameters: 
+	vPath - full path to verify.
+
+Returns:
+	Returns 1 (TRUE) if the string is in the form \\server\share; otherwise, 0 (FALSE)
+
+References:
+	* <PathIsUNCServerShare function: https://msdn.microsoft.com/en-us/ie/bb773723(v=vs.80)>
+*/
+PathIsUNCServerShare(vPath) {
+	vPath := PathFixSlashes(vPath)
+    ret := DllCall("SHLWAPI.DLL\PathIsUNCServerShare", "Str",vPath)
+	return ret
 }
 
 ;========================================================================
@@ -189,7 +497,7 @@ Returns:
     resulting relative path
 
 References:
-	* <Microsoft shlwapi-Documentation: https://docs.microsoft.com/en-us/windows/win32/shell/shlwapi-path>, 
+	* <PathRelativePathTo: https://docs.microsoft.com/en-us/windows/win32/api/shlwapi/nf-shlwapi-pathrelativepathtoa>
 */
 PathRelativePathTo(From,atrFrom,To,atrTo)  {
     static MAX_PATH := 255
@@ -205,10 +513,11 @@ PathRelativePathTo(From,atrFrom,To,atrTo)  {
 }
 
 
-; ***************************************************************************************************************
-; *** Tool - Functions
-; ***************************************************************************************************************
+/* ********************************************************************** 
+Section: Additional Path Handling Functions
 
+Additional path handling functions, which might be useful but not covered by shlwapi-path functionality
+*/
 ;========================================================================
 /* 	Function: PathCat
 

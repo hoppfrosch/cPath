@@ -8,3 +8,5 @@ lib/__Path.ahk
 lib/Path.Tiny.pm
 lib/shlwapi_Path.todo.ahk
 _local
+/.project
+t/YUnit_PathAPI.ahk

@@ -4,22 +4,25 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"label": "1.) Build the libraries",
+			"label": "Run the current AHK-file",
 			"type": "shell",
-			"script": "./_build/autohotkey.exe ./_build/build.ahk",
+			"script": "${workspaceFolder}/_build/autohotkey.exe ${file}",
 			"windows": {
-				"command": ".\\_build\\autohotkey.exe .\\_build\\build.ahk"
+				"command": "${workspaceFolder}\\_build\\autohotkey.exe ${file}"
 			},
 			"presentation": {
 				"panel": "shared"
 			},
 			"group": {
-				"kind": "build",
+				"kind": "test",
 				"isDefault": true
+			},
+			"options": {
+				"cwd": "${fileDirname}"
 			}
 		},
 		{
-			"label": "2.) Build the documentation",
+			"label": "Build the documentation",
 			"type": "shell",
 			"script": "${workspaceRoot}/_build/autohotkey.exe ${workspaceRoot}/_build/mkdoc.ahk",
 			"windows": {

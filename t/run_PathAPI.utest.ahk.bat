@@ -1,0 +1,1 @@
+..\_build\AutoHotkey.exe .\PathAPI.utest.ahk
