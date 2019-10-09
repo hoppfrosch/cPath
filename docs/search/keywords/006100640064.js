@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("add",["Section"],[["Additional",,[[,"Additional Path Handling Functions",,,0,"File:PathAPI.ahk:Additional_Path_Handling_Functions"]]]]);
