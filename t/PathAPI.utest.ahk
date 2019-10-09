@@ -21,6 +21,15 @@ for test, expected in data {
 	assert(StrCompare(res,expected) = 0, "PathAddBackslash('" test "') -> " res)
 }
 
+; /* ---------------------------- PathAppend ---------------------------- */
+data := Array()
+data.push Map("arg1", "name_1\name_2", "arg2", "name3", "expected", "name_1\name_2\name3")
+data.push Map("arg1", "..\name_1\name_2", "arg2", "name3", "expected", "name_1\name_2\name3")
+
+Loop data.Length {
+	res := PathAppend(data[A_Index]["arg1"], data[A_Index]["arg2"])
+	assert(StrCompare(res,data[A_Index]["expected"]) = 0, "PathAppend('" data[A_Index]["arg1"] "', '" data[A_Index]["arg2"] "') -> " res)
+}
 ; ---------------------------- PathCanonicalize ---------------------------- 
 expected := "C:\tmp\test.txt"
 strResult := PathCanonicalize("C:/tmp/..\test/../tmp/test.txt")

@@ -122,6 +122,30 @@ PathAddBackslash(vPath) {
 }
 
 ;========================================================================
+/* 	Function: PathAppend
+
+Appends one path to the end of another.
+
+Note:
+Misuse of this function can lead to a buffer overrun. We recommend the use of the safer <PathCchAppend> 
+or <PathCchAppendEx> function in its place.
+
+Parameters: 
+	dirname - string of maximum length MAX_PATH that contains the path to be appendeded to.
+	dirmore - string of maximum length MAX_PATH that contains the path to be appended.
+
+Returns:
+    concatenated path string
+
+References:
+	* <PathAppend: https://docs.microsoft.com/en-us/windows/win32/api/shlwapi/nf-shlwapi-pathappenda>
+*/
+PathAppend(dirname, dirmore) {
+	ret := dllCall("shlwapi.dll\PathAppend", "Str", dirname, "Str", dirmore)	
+	return dirname
+}
+
+;========================================================================
 /* 	Function: PathCanonicalize
 
 Simplifies a path by removing navigation elements such as "." and ".." to produce a direct, well-formed path.
@@ -156,7 +180,7 @@ Returns:
     concatenated path string
 
 References:
-	* <Microsoft Documentation: https://docs.microsoft.com/en-us/windows/win32/shell/shlwapi-path>, 
+	* <PathCombine: https://docs.microsoft.com/en-us/windows/win32/api/shlwapi/nf-shlwapi-pathcombinea>
 */
 PathCombine(dirname, filename) {
 	static MAX_PATH := 255
@@ -177,7 +201,7 @@ Returns:
     1 (TRUE) if the file exists; otherwise, 0 (FALSE).
 
 References:
-	* <Microsoft Documentation: https://docs.microsoft.com/en-us/windows/win32/shell/shlwapi-path>, 
+	* <PathFileExists: https://docs.microsoft.com/en-us/windows/win32/api/shlwapi/nf-shlwapi-pathfileexistsa>
 
 */
 PathFileExists(vPath) {
