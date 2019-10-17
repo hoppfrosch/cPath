@@ -27,8 +27,29 @@ Loop data.Length {
 	assert(StrCompare(res,data[A_Index]["expected"]) = 0, "path.new('" data[A_Index]["arg1"] "', '" data[A_Index]["arg2"] "', '" data[A_Index]["arg3"] "').canonpath -> " res)
 }
 
-; /* ------------------------------ mypath.exists ----------------------------- */
+; /* ------------------------------ mypath.is_dir ---------------------------- */
+data := Map()
+data["c:\Windows\explorer.exe"] := 0
+data["c:\Windows\explorer999.exe"] := 0
+data["c:\Windows"] := 1
+data["c:\Windows999"] := 0
+for test, expected in data {
+	res := path(test).is_dir
+	assert(res = expected, "path('" test "').is_dir -> " res " (expected: '" expected "')")
+} 
 
+; /* ------------------------------ mypath.is_file --------------------------- */
+data := Map()
+data["c:\Windows\explorer.exe"] := 1
+data["c:\Windows\explorer999.exe"] := 0
+data["c:\Windows"] := 0
+data["c:\Windows999"] := 0
+for test, expected in data {
+	res := path(test).is_file
+	assert(res = expected, "path('" test "').is_file -> " res " (expected: '" expected "')")
+} 
+
+; /* ------------------------------ mypath.exists ----------------------------- */
 data := Map()
 data["c:\Windows\explorer.exe"] := 1
 data["c:\Windows\explorer999.exe"] := 0
@@ -38,6 +59,8 @@ for test, expected in data {
 	res := path(test).exists
 	assert(res = expected, "path('" test "').exists -> " res " (expected: '" expected "')")
 } 
+
+
 ; -------------------------------------------------------------------------- 
 ;                                   Summary                                 
 ; -------------------------------------------------------------------------- 
