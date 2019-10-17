@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("exi",["Property"],[["exists",,[["Path",,,,0,"File:cPath.ahk:Path.exists","AutoHotKeyClass:Path:exists"]]]]);

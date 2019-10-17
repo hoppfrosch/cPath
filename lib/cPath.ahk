@@ -18,7 +18,7 @@ class Path {
 	 _parts := Array()
 	
 
-	; ===== Methods ===============================================================
+	; ===== Properties ===============================================================
 	canonpath[] {
 	/* -------------------------------------------------------------------------------
 	Property: canonpath [get]
@@ -32,6 +32,22 @@ class Path {
 	*/
 		get {
 			return PathCanonicalize(this._path)
+		}
+	}
+
+	exists[] {
+	/* -------------------------------------------------------------------------------
+	Property: exists [get]
+	Checks for the existence of a file or folder
+
+	Examples: 
+	> res := (path("c:\Windows\explorer.exe").exists)
+	*/
+		get {
+			if (FileExist(this._path)) {
+				return True
+			}
+			return False
 		}
 	}
 
@@ -49,7 +65,7 @@ class Path {
 		}
 	}
 
-	; ===== Properties ===============================================================#
+	; ===== Methods ===============================================================#
 	/* 	Constructor: __New
 
 	Konstruktor for Class <Path>. This constructor does not needed to be called directly.

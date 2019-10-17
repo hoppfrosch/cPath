@@ -21,12 +21,23 @@ Loop data.Length {
 }
 
 ; /* ------------------------ path.new(args).canonpath ------------------------ */
-data.push Map("arg1", "C:/tmp/..\test", "arg2", "../tmp", "arg3", "test.txtx", "expected", "C:\tmp\test.txt")
-
+; Reuse previous data
 Loop data.Length {
 	res := path.new(data[A_Index]["arg1"], data[A_Index]["arg2"], data[A_Index]["arg3"]).canonpath
 	assert(StrCompare(res,data[A_Index]["expected"]) = 0, "path.new('" data[A_Index]["arg1"] "', '" data[A_Index]["arg2"] "', '" data[A_Index]["arg3"] "').canonpath -> " res)
 }
+
+; /* ------------------------------ mypath.exists ----------------------------- */
+
+data := Map()
+data["c:\Windows\explorer.exe"] := 1
+data["c:\Windows\explorer999.exe"] := 0
+data["c:\Windows"] := 1
+data["c:\Windows999"] := 0
+for test, expected in data {
+	res := path(test).exists
+	assert(res = expected, "path('" test "').exists -> " res " (expected: '" expected "')")
+} 
 ; -------------------------------------------------------------------------- 
 ;                                   Summary                                 
 ; -------------------------------------------------------------------------- 

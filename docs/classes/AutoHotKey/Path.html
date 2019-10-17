@@ -22,19 +22,24 @@
  <div class="CBody"><p>Returns the canonicalized path</p><div class="CHeading">See</div><p>&lt;stringify&gt;, &lt;value&gt;</p><div class="CHeading">Examples</div><pre>MsgBox(path.new(&quot;C:/tmp/..\test&quot;, &quot;../tmp&quot;, &quot;test.txt&quot;).canonpath)</pre></div>
 </div>
 
-<a name="parts"></a><a name="Topic9"></a><div class="CTopic TProperty LAutoHotKey">
+<a name="exists"></a><a name="Topic9"></a><div class="CTopic TProperty LAutoHotKey">
+ <div class="CTitle">exists [get]</div>
+ <div class="CBody"><p>Checks for the existence of a file or folder</p><div class="CHeading">Examples</div><pre>res := (path(&quot;c:\Windows\explorer.exe&quot;).exists)</pre></div>
+</div>
+
+<a name="parts"></a><a name="Topic10"></a><div class="CTopic TProperty LAutoHotKey">
  <div class="CTitle">parts [get]</div>
  <div class="CBody"><p>Returns the initial parts of the path</p><div class="CHeading">Examples</div><pre>arr := Array()<br />arr := path(&quot;C:/tmp/..\test&quot;, &quot;../tmp&quot;, &quot;test.txt&quot;).parts</pre></div>
 </div>
 
-<a name="Functions"></a><a name="Topic10"></a><div class="CTopic TGroup LAutoHotKey">
+<a name="Functions"></a><a name="Topic11"></a><div class="CTopic TGroup LAutoHotKey">
  <div class="CTitle">Functions</div>
 </div>
 
-<a name="__New"></a><a name="Topic11"></a><div class="CTopic TFunction LAutoHotKey last">
+<a name="__New"></a><a name="Topic12"></a><div class="CTopic TFunction LAutoHotKey last">
  <div class="CTitle">__New</div>
- <div id="NDPrototype11" class="NDPrototype WideForm CStyle"><table><tr><td class="PBeforeParameters">__New(</td><td class="PParametersParentCell"><table class="PParameters"><tr><td class="PName first last">vPath,</td></tr><tr><td class="PName first last">params*</td></tr></table></td><td class="PAfterParameters">)</td></tr></table></div>
- <div class="CBody"><p>Konstruktor for Class <a href="../../index.html#AutoHotKeyClass:Path" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,6);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >Path</a>. This constructor does not needed to be called directly- To shorten the call - and to mimic Perl's <a href="https://metacpan.org/pod/Path::Tiny" target="_top">Path::Tiny</a>, a function as constructor was provided instead:</p><pre>x := path(&quot;C:/tmp/..\test&quot;, &quot;../tmp&quot;, &quot;test.txt&quot;) ; notice the missing call to &lt;new&gt;</pre><div class="CHeading">Parameters</div><table class="CDefinitionList"><tr><td class="CDLEntry">path</td><td class="CDLDefinition"><p>path</p></td></tr><tr><td class="CDLEntry">params*</td><td class="CDLDefinition"><p>more pathes. All pathes are used to build the final path</p></td></tr></table><div class="CHeading">Returns</div><p>class <a href="../../index.html#AutoHotKeyClass:Path" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,6);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >Path</a></p></div>
+ <div id="NDPrototype12" class="NDPrototype WideForm CStyle"><table><tr><td class="PBeforeParameters">__New(</td><td class="PParametersParentCell"><table class="PParameters"><tr><td class="PName first last">vPath,</td></tr><tr><td class="PName first last">params*</td></tr></table></td><td class="PAfterParameters">)</td></tr></table></div>
+ <div class="CBody"><p>Konstruktor for Class <a href="../../index.html#AutoHotKeyClass:Path" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,6);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >Path</a>. This constructor does not needed to be called directly.&nbsp; To shorten the call and to mimic Perl's <a href="https://metacpan.org/pod/Path::Tiny" target="_top">Path::Tiny</a>, a function as constructor was provided instead:</p><pre>x := path(&quot;C:/tmp/..\test&quot;, &quot;../tmp&quot;, &quot;test.txt&quot;) ; notice the missing call to &lt;new&gt;</pre><div class="CHeading">Parameters</div><table class="CDefinitionList"><tr><td class="CDLEntry">path</td><td class="CDLDefinition"><p>path</p></td></tr><tr><td class="CDLEntry">params*</td><td class="CDLDefinition"><p>more pathes. All pathes are used to build the final path</p></td></tr></table><div class="CHeading">Returns</div><p>class <a href="../../index.html#AutoHotKeyClass:Path" target="_top" onmouseover="NDContentPage.OnLinkMouseOver(event,6);" onmouseout="NDContentPage.OnLinkMouseOut(event);" >Path</a></p></div>
 </div>
 
 </body></html>
