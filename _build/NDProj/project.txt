@@ -9,7 +9,7 @@ Format: 2.0.2
 # ------------------------------------------------------------------------
 
 Title: cPath
-Subtitle: Version 0.2.0
+Subtitle: Version 0.3.0
 
 Copyright: © 2019, Johannes Kilian, MIT License
 
