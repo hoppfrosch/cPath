@@ -201,14 +201,14 @@ assert(StrCompare(strResult,expected) = 0, "<PathRelativePathTo> (Result <" strR
 ;                                   Summary                                 
 ; -------------------------------------------------------------------------- 
 OutputDebug "*********************************************************************************************************"
-OutputDebug "*** UnitTest-Summary: " n_assert " overall - " n_assert_fail " fail - " n_assert_success " success *****"
+OutputDebug "*** UnitTest-Summary: " n_assert " overall - " n_assert_fail " fail - " n_assert_success " pass *********"
 OutputDebug "*********************************************************************************************************"
 return
 
 assert(test_ok, message) {
 	global 
 	n_assert++
-	str := "SUCCESS"
+	str := "PASS"
 	If (test_ok != 1) {
 		str := "FAIL"
 		n_assert_fail++
