@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("glo",["Section"],[["Global",,[[,"Global Functions",,,0,"File:cPath.ahk:Global_Functions"]]]]);

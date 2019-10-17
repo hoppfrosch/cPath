@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("re_",["Class"],[["RE_PATH",,[[,,,,0,"File:cPath.ahk:RE_PATH","AutoHotKeyClass:RE_PATH"]]]]);
