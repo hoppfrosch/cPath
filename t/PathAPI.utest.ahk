@@ -44,7 +44,7 @@ assert(StrCompare(strResult,expected) = 0, "<PathCombine> (Result <" strResult "
 data := Map()
 data["c:\Windows\regedit.exe"] := 1
 data["c:\Windows\MyFantasy.exe"] := 0
-
+data["c:\Windows\*.exe"] := 0 ; Wildcards are not allowed
 for test, expected in data {
 	res := PathFileExists(test)
 	assert(res = expected, "PathFileExists('" test "') -> " res)
