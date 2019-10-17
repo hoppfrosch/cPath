@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("is_",["Property"],[["is_dir",,[["Path",,,,0,"File:cPath.ahk:Path.is_dir","AutoHotKeyClass:Path:is_dir"]]],["is_file",,[["Path",,,,0,"File:cPath.ahk:Path.is_file","AutoHotKeyClass:Path:is_file"]]]]);

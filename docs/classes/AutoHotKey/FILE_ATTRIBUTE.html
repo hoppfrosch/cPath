@@ -8,106 +8,106 @@
 
 <body onload="NDLoader.OnLoad('Content');" class="NDPage NDContentPage">
 
-<a name="Topic23"></a><div class="CTopic TClass LAutoHotKey first">
+<a name="Topic6"></a><div class="CTopic TClass LAutoHotKey first">
  <div class="CTitle">FILE_ATTRIBUTE</div>
  <div class="CBody"><p>Helper Class to define FILE ATTRIBUTE CONSTANTS</p><p>This class does not have any method but rather defines only file attribute constants.</p><p>Authors:	<a href="#" onclick="javascript:location.href='ma\u0069'+'lto\u003a'+'hoppf'+'rosch'+'\u0040'+'gmx'+'\u002ede';return false;">hoppfrosch</a>: Original</p><div class="CHeading">References</div><ul><li><p><a href="https://docs.microsoft.com/en-us/windows/win32/fileio/file-attribute-constants" target="_top">Microsoft Documentation</a>,</p></li></ul><p>Example</p><pre>MsgBox FILE_ATTRIBUTE.DIRECTORY</pre></div>
 </div>
 
-<a name="Constants"></a><a name="Topic24"></a><div class="CTopic TGroup LAutoHotKey">
+<a name="Constants"></a><a name="Topic7"></a><div class="CTopic TGroup LAutoHotKey">
  <div class="CTitle">Constants</div>
 </div>
 
-<a name="ARCHIVE"></a><a name="Topic25"></a><div class="CTopic TConstant LAutoHotKey">
+<a name="ARCHIVE"></a><a name="Topic8"></a><div class="CTopic TConstant LAutoHotKey">
  <div class="CTitle">ARCHIVE</div>
  <div class="CBody"><p>A file or directory that is an archive file or directory. Applications typically use this attribute to mark files for backup or removal</p></div>
 </div>
 
-<a name="COMPRESSED"></a><a name="Topic26"></a><div class="CTopic TConstant LAutoHotKey">
+<a name="COMPRESSED"></a><a name="Topic9"></a><div class="CTopic TConstant LAutoHotKey">
  <div class="CTitle">COMPRESSED</div>
  <div class="CBody"><p>A file or directory that is compressed. For a file, all of the data in the file is compressed. For a directory, compression is the default for newly created files and subdirectories.</p></div>
 </div>
 
-<a name="DEVICE"></a><a name="Topic27"></a><div class="CTopic TConstant LAutoHotKey">
+<a name="DEVICE"></a><a name="Topic10"></a><div class="CTopic TConstant LAutoHotKey">
  <div class="CTitle">DEVICE</div>
  <div class="CBody"><p>This value is reserved for system use.</p></div>
 </div>
 
-<a name="DIRECTORY"></a><a name="Topic28"></a><div class="CTopic TConstant LAutoHotKey">
+<a name="DIRECTORY"></a><a name="Topic11"></a><div class="CTopic TConstant LAutoHotKey">
  <div class="CTitle">DIRECTORY</div>
  <div class="CBody"><p>The handle that identifies a directory.</p></div>
 </div>
 
-<a name="ENCRYPTED"></a><a name="Topic29"></a><div class="CTopic TConstant LAutoHotKey">
+<a name="ENCRYPTED"></a><a name="Topic12"></a><div class="CTopic TConstant LAutoHotKey">
  <div class="CTitle">ENCRYPTED</div>
  <div class="CBody"><p>A file or directory that is encrypted. For a file, all data streams in the file are encrypted. For a directory, encryption is the default for newly created files and subdirectories.</p></div>
 </div>
 
-<a name="HIDDEN"></a><a name="Topic30"></a><div class="CTopic TConstant LAutoHotKey">
+<a name="HIDDEN"></a><a name="Topic13"></a><div class="CTopic TConstant LAutoHotKey">
  <div class="CTitle">HIDDEN</div>
  <div class="CBody"><p>The file or directory is hidden. It is not included in an ordinary directory listing.</p></div>
 </div>
 
-<a name="INTEGRITY_STREAM"></a><a name="Topic31"></a><div class="CTopic TConstant LAutoHotKey">
+<a name="INTEGRITY_STREAM"></a><a name="Topic14"></a><div class="CTopic TConstant LAutoHotKey">
  <div class="CTitle">INTEGRITY_STREAM</div>
  <div class="CBody"><p>The directory or user data stream is configured with integrity (only supported on ReFS volumes). It is not included in an ordinary directory listing. The integrity setting persists with the file if it's renamed. If a file is copied the destination file will have integrity set if either the source file or destination directory have integrity set.</p></div>
 </div>
 
-<a name="NORMAL"></a><a name="Topic32"></a><div class="CTopic TConstant LAutoHotKey">
+<a name="NORMAL"></a><a name="Topic15"></a><div class="CTopic TConstant LAutoHotKey">
  <div class="CTitle">NORMAL</div>
  <div class="CBody"><p>A file that does not have other attributes set. This attribute is valid only when used alone.</p></div>
 </div>
 
-<a name="NOT_CONTENT_INDEXED"></a><a name="Topic33"></a><div class="CTopic TConstant LAutoHotKey">
+<a name="NOT_CONTENT_INDEXED"></a><a name="Topic16"></a><div class="CTopic TConstant LAutoHotKey">
  <div class="CTitle">NOT_CONTENT_INDEXED</div>
  <div class="CBody"><p>The file or directory is not to be indexed by the content indexing service.</p></div>
 </div>
 
-<a name="NO_SCRUB_DATA"></a><a name="Topic34"></a><div class="CTopic TConstant LAutoHotKey">
+<a name="NO_SCRUB_DATA"></a><a name="Topic17"></a><div class="CTopic TConstant LAutoHotKey">
  <div class="CTitle">NO_SCRUB_DATA</div>
  <div class="CBody"><p>The user data stream not to be read by the background data integrity scanner (AKA scrubber). When set on a directory it only provides inheritance. This flag is only supported on Storage Spaces and ReFS volumes. It is not included in an ordinary directory listing.</p></div>
 </div>
 
-<a name="OFFLINE"></a><a name="Topic35"></a><div class="CTopic TConstant LAutoHotKey">
+<a name="OFFLINE"></a><a name="Topic18"></a><div class="CTopic TConstant LAutoHotKey">
  <div class="CTitle">OFFLINE</div>
  <div class="CBody"><p>The data of a file is not available immediately. This attribute indicates that the file data is physically moved to offline storage. This attribute is used by Remote Storage, which is the hierarchical storage management software. Applications should not arbitrarily change this attribute.</p></div>
 </div>
 
-<a name="READONLY"></a><a name="Topic36"></a><div class="CTopic TConstant LAutoHotKey">
+<a name="READONLY"></a><a name="Topic19"></a><div class="CTopic TConstant LAutoHotKey">
  <div class="CTitle">READONLY</div>
  <div class="CBody"><p>A file that is read-only. Applications can read the file, but cannot write to it or delete it. This attribute is not honored on directories.</p></div>
 </div>
 
-<a name="RECALL_ON_DATA_ACCESS"></a><a name="Topic37"></a><div class="CTopic TConstant LAutoHotKey">
+<a name="RECALL_ON_DATA_ACCESS"></a><a name="Topic20"></a><div class="CTopic TConstant LAutoHotKey">
  <div class="CTitle">RECALL_ON_DATA_ACCESS</div>
  <div class="CBody"><p>When this attribute is set, it means that the file or directory is not fully present locally. For a file that means that not all of its data is on local storage (e.g. it may be sparse with some data still in remote storage). For a directory it means that some of the directory contents are being virtualized from another location. Reading the file / enumerating the directory will be more expensive than normal, e.g. it will cause at least some of the file/directory content to be fetched from a remote store. Only kernel-mode callers can set this bit.</p></div>
 </div>
 
-<a name="RECALL_ON_OPEN"></a><a name="Topic38"></a><div class="CTopic TConstant LAutoHotKey">
+<a name="RECALL_ON_OPEN"></a><a name="Topic21"></a><div class="CTopic TConstant LAutoHotKey">
  <div class="CTitle">RECALL_ON_OPEN</div>
  <div class="CBody"><p>This attribute only appears in directory enumeration classes (FILE_DIRECTORY_INFORMATION, FILE_BOTH_DIR_INFORMATION, etc.). When this attribute is set, it means that the file or directory has no physical representation on the local system; the item is virtual. Opening the item will be more expensive than normal, e.g. it will cause at least some of it to be fetched from a remote store.</p></div>
 </div>
 
-<a name="REPARSE_POINT"></a><a name="Topic39"></a><div class="CTopic TConstant LAutoHotKey">
+<a name="REPARSE_POINT"></a><a name="Topic22"></a><div class="CTopic TConstant LAutoHotKey">
  <div class="CTitle">REPARSE_POINT</div>
  <div class="CBody"><p>A file or directory that has an associated reparse point, or a file that is a symbolic link.</p></div>
 </div>
 
-<a name="SPARSE_FILE"></a><a name="Topic40"></a><div class="CTopic TConstant LAutoHotKey">
+<a name="SPARSE_FILE"></a><a name="Topic23"></a><div class="CTopic TConstant LAutoHotKey">
  <div class="CTitle">SPARSE_FILE</div>
  <div class="CBody"><p>A file that is a sparse file.</p></div>
 </div>
 
-<a name="SYSTEM"></a><a name="Topic41"></a><div class="CTopic TConstant LAutoHotKey">
+<a name="SYSTEM"></a><a name="Topic24"></a><div class="CTopic TConstant LAutoHotKey">
  <div class="CTitle">SYSTEM</div>
  <div class="CBody"><p>A file or directory that the operating system uses a part of, or uses exclusively.</p></div>
 </div>
 
-<a name="TEMPORARY"></a><a name="Topic42"></a><div class="CTopic TConstant LAutoHotKey">
+<a name="TEMPORARY"></a><a name="Topic25"></a><div class="CTopic TConstant LAutoHotKey">
  <div class="CTitle">TEMPORARY</div>
  <div class="CBody"><p>A file that is being used for temporary storage. File systems avoid writing data back to mass storage if sufficient cache memory is available, because typically, an application deletes a temporary file after the handle is closed. In that scenario, the system can entirely avoid writing the data. Otherwise, the data is written after the handle is closed.</p></div>
 </div>
 
-<a name="VIRTUAL"></a><a name="Topic43"></a><div class="CTopic TConstant LAutoHotKey last">
+<a name="VIRTUAL"></a><a name="Topic26"></a><div class="CTopic TConstant LAutoHotKey last">
  <div class="CTitle">VIRTUAL</div>
  <div class="CBody"><p>This value is reserved for system use.</p></div>
 </div>

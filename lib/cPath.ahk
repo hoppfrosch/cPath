@@ -35,16 +35,48 @@ class Path {
 		}
 	}
 
+	is_dir[] {
+	/* -------------------------------------------------------------------------------
+	Property: is_dir [get]
+	Checks if given path is a directory
+
+	Examples: 
+	> res := path("c:\Windows\explorer.exe").is_dir
+	*/
+		get {
+			if ((this.exists) & (PathIsDirectory(this._path) = FILE_ATTRIBUTE.DIRECTORY)) {
+				return True
+			}
+			return False
+		}
+	}
+
+	is_file[] {
+	/* -------------------------------------------------------------------------------
+	Property: is_file [get]
+	Checks if given path is file
+
+	Examples: 
+	> res := path("c:\Windows\explorer.exe").is_file
+	*/
+		get {
+			if ((this.exists) & (PathIsDirectory(this._path) != FILE_ATTRIBUTE.DIRECTORY)) {
+				return True
+			}
+			return False
+		}
+	}
+
 	exists[] {
 	/* -------------------------------------------------------------------------------
 	Property: exists [get]
-	Checks for the existence of a file or folder
+	Checks for the existance of a file or folder
 
 	Examples: 
-	> res := (path("c:\Windows\explorer.exe").exists)
+	> res := path("c:\Windows\explorer.exe").exists
 	*/
 		get {
-			if (FileExist(this._path)) {
+			if (PathFileExists(this._path)) {
 				return True
 			}
 			return False
