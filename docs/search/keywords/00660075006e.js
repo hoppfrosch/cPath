@@ -1,1 +1,1 @@
-NDSearch.OnPrefixDataLoaded("fun",["Section"],[["Functions",,[[,"Additional Path Handling Functions",,,0,"File:PathAPI.ahk:Additional_Path_Handling_Functions"],[,"Shell Path Handling Functions",,,0,"File:PathAPI.ahk:Shell_Path_Handling_Functions"]]]]);
+NDSearch.OnPrefixDataLoaded("fun",["Section"],[["Functions",,[[,"Additional Path Handling Functions",,,0,"File:PathAPI.ahk:Additional_Path_Handling_Functions"],[,"Global Functions",,,0,"File:cPath.ahk:Global_Functions"],[,"Shell Path Handling Functions",,,0,"File:PathAPI.ahk:Shell_Path_Handling_Functions"]]]]);

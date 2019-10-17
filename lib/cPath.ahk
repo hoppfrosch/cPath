@@ -10,7 +10,7 @@ class Path {
 	/* Class: Path
     	class for working with file paths
 
-		It is build after Perl's <Path\:\:Tiny: https://metacpan.org/pod/Path::Tiny> module.
+		It is build after Perl's <Path::Tiny: https://metacpan.org/pod/Path::Tiny> module.
 
 	Authors:	<hoppfrosch at hoppfrosch@gmx.de>: Original
 	*/
@@ -28,7 +28,7 @@ class Path {
 	<stringify>, <value>
 
 	Examples: 
-	> MsgBox(path("C:/tmp/..\test", "../tmp", "test.txt").canonpath)
+	> MsgBox(path.new("C:/tmp/..\test", "../tmp", "test.txt").canonpath)
 	*/
 		get {
 			return PathCanonicalize(this._path)
@@ -52,7 +52,11 @@ class Path {
 	; ===== Properties ===============================================================#
 	/* 	Constructor: __New
 
-	Konstruktor for Class <Path>
+	Konstruktor for Class <Path>. This constructor does not needed to be called directly.
+	To shorten the call and to mimic Perl's <Path::Tiny: https://metacpan.org/pod/Path::Tiny>,
+	a function as constructor was provided instead:
+
+	> x := path("C:/tmp/..\test", "../tmp", "test.txt") ; notice the missing call to <new>
 
 	Parameters: 
 		path - path 
@@ -120,12 +124,13 @@ class RE_PATH {
 }
 
 ; ***************************************************************************************************************
-; Section: Globals
+; Section: Global Functions
 ; ***************************************************************************************************************
 ;========================================================================
 /* 	Function: Path
 
-Konstruktor for Class <Path>
+Constructor for Class <Path>.
+It was implemented to mimic Perl's <Path::Tiny: https://metacpan.org/pod/Path::Tiny>,
 
 Parameters: 
 	path - path 
@@ -134,11 +139,8 @@ Parameters:
 Returns:
     class <Path>
 
-AutoHotkey Version:
-	Tested & developed with Autohotkey 2.0-a104
-
-Encoding:
-	Unicode / ASCII
+Examples: 
+	> MsgBox(path("C:/tmp/..\test", "../tmp", "test.txt").canonpath)
 */
 Path(vPath, params*) {
 	return Path.new(vPath, params*)

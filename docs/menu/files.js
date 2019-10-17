@@ -1,1 +1,1 @@
-NDMenu.OnSectionLoaded("files.js",[[1,"PathAPI.ahk"],[1,"Readme.txt"]]);
+NDMenu.OnSectionLoaded("files.js",[[1,"cPath.ahk"],[1,"PathAPI.ahk"],[1,"Readme.txt"]]);
