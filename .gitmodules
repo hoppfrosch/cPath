@@ -1,6 +1,3 @@
-[submodule "lib/log4ahk"]
-	path = lib/log4ahk
-	url = git@github.com:AutoHotkey-V2/log4ahk.git
 [submodule "t/YUnit"]
 	path = t/YUnit
 	url = https://github.com/Lexikos/Yunit.git
