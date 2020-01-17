@@ -1,4 +1,4 @@
 [submodule "t/YUnit"]
 	path = t/YUnit
-	url = https://github.com/Lexikos/Yunit.git
+	url = https://github.com/Uberi/Yunit.git
 	branch = v2
